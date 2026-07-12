@@ -10,7 +10,7 @@ Funciona en PC y Android con Pydroid 3
 ### ✨ Características
 - **YouTube**: Descarga Video en 1080p, 720p, 480p, 360p
 - **MP3**: Extrae solo el audio de YouTube
-- **WGET**: Descarga cualquier link directo
+- **Requests**: Descarga cualquier link directo
 - **Multiplataforma**: PC Windows y Android con Pydroid
 - **DNS Personalizado**: Para evitar bloqueos
 - **Interfaz moderna**: Estilo Google Play Store
