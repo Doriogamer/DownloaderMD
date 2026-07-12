@@ -1,44 +1,37 @@
-# DownloaderMD 🐍
+# 📥 DownloaderMD
 
-Un descargador todoterreno en Python desarrollado por **Google Antigravity** para bajar videos de YouTube y archivos normales de internet.
+**Descargador universal para YouTube, MP3 y links directos**  
+Funciona en PC y Android con Pydroid 3
 
-¡Olvídate de la consola! Este proyecto ya viene con su propio **instalador ejecutable**, por lo que no necesitas escribir comandos en la terminal para hacerlo funcionar.
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Version](https://img.shields.io/badge/Version-1.0-brightgreen)
 
----
+### ✨ Características
+- **YouTube**: Descarga Video en 1080p, 720p, 480p, 360p
+- **MP3**: Extrae solo el audio de YouTube
+- **WGET**: Descarga cualquier link directo
+- **Multiplataforma**: PC Windows y Android con Pydroid
+- **DNS Personalizado**: Para evitar bloqueos
+- **Interfaz moderna**: Estilo Google Play Store
 
-## 🚀 Características
-- **Vídeos de YouTube:** Solo copia el enlace normal del vídeo y pégalo en el programa.
-- **Archivos normales:** Descarga imágenes, PDFs, ZIPs, etc. (Para estos, **es obligatorio usar el link directo de descarga**).
-- **Sin comandos:** Interfaz simple e instalador directo para abrir y usar xd.
+### 📲 Descarga
+Ve a la sección **[Releases](https://github.com/Doriogamer/DownloaderMD/releases)** y descarga `DownloaderMD.exe`
 
----
+### 🛠️ Requisitos
+**PC:** Windows 10+
+**Android:** Pydroid 3 + `pip install yt-dlp` + `pkg install ffmpeg wget`
 
-## 💻 Instalación y Uso
+### 🚀 Como usar
+1. Pega el link de YouTube o descarga directa
+2. Elige Video o MP3
+3. Selecciona la calidad
+4. Dale a DESCARGAR
 
-¡Es súper fácil y no requiere conocimientos de programación!
+### 📸 Capturas
+*Pronto subiré capturas de la app*
 
-1. **Descarga el instalador:** Ve a la sección de **Releases** de este repositorio y baja el archivo de instalación (por ejemplo, `DownloaderMD_Setup.exe`).
-2. **Instala el programa:** Haz doble clic sobre el instalador descargado y sigue los pasos en pantalla como con cualquier programa normal.
-3. **¡Listo para usar!** Abre el acceso directo que se creó en tu escritorio, pega tu enlace y empieza a descargar.
+### 🤝 Contribuir
+Acepto ideas y mejoras. Abre un "Issue" o "Pull Request"
 
----
-
-## 📖 Reglas para los Enlaces (¡Importante!)
-
-El programa detecta automáticamente el tipo de contenido, pero debes ingresar los links de la forma correcta:
-
-### 1. Para Videos de YouTube 📺
-Puedes usar el link normal que copias desde la barra de direcciones del navegador o desde el botón "Compartir".
-* **Ejemplo correcto:** `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
-
-### 2. Para Archivos Normales 📁
-Si vas a bajar un archivo cualquiera de internet, **tienes que poner el link directo**. Esto significa que el enlace debe terminar en la extensión del archivo (como `.zip`, `.exe`, `.mp4`, `.pdf`, etc.).
-* **Ejemplo correcto:** `https://sitio.com/archivo.zip`
-* *Nota:* No uses enlaces de páginas intermedias (como la página de MediaFire antes de hacer clic en el botón de descarga), ya que el programa no podrá iniciar la descarga directa.
-
----
-
-## 🛠️ Desarrollo y Soporte
-
-Proyecto creado por Doriogamer bajo el sello de **Google Antigravity**. Si encuentras algún problema o quieres sugerir una mejora, puedes abrir un *Issue* en este repositorio.
-
+### ⭐ Si te sirvió el proyecto dame una estrella!
