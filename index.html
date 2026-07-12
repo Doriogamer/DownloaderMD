@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DownloaderMD - Descargador para WhatsApp</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { 
+    background: #E5DDD5; 
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://user-images.githubusercontent.com/15082520/143672952-3f7b0f3a-1b8e-4f2a-9b8c-3b8b8b8b8b8b.png');
+  }
+  header { 
+    background: #128C7E; 
+    color: white;
+    padding: 25px 20px; 
+    text-align: center; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+  }
+  header h1 { font-size: 1.8em; font-weight: 700; }
+  header p { font-size: 0.95em; opacity: 0.9; margin-top: 5px; }
+  
+  .chat-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 15px;
+  }
+  
+  .bubble {
+    background: #FFFFFF;
+    padding: 15px 18px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    position: relative;
+    max-width: 90%;
+  }
+  .bubble.mine {
+    background: #DCF8C6;
+    margin-left: auto;
+  }
+  
+  .btn-whatsapp { 
+    display: block; 
+    background: #25D366; 
+    color: #fff; 
+    padding: 14px 20px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    font-size: 1.1em;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: 0.2s;
+  }
+  .btn-whatsapp:hover { 
+    background: #20BA5A; 
+  }
+  
+  .btn-github {
+    display: block;
+    background: #54656F;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h3 { color: #128C7E; margin-bottom: 10px; font-size: 1.2em; }
+  .feature-list { list-style: none; }
+  .feature-list li { padding: 8px 0; border-bottom: 1px solid #EDEDED; }
+  .feature-list li:before { content: "✅ "; color: #25D366; }
+  code { background: #F0F0F0; padding: 2px 6px; border-radius: 4px; color: #D32F2F; }
+  footer { 
+    text-align: center; 
+    padding: 20px; 
+    color: #667781;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📥 DownloaderMD</h1>
+  <p>Tu descargador personal | Hecho en Python</p>
+</header>
+
+<div class="chat-container">
+
+  <div class="bubble">
+    <h3>Hola! Soy DownloaderMD 👋</h3>
+    <p>Descargo videos de YouTube, MP3 y cualquier link directo. Funciono en PC (Windows 10 solo :(  .)</p>
+  </div>
+
+  <div class="bubble mine">
+    <p><b>¿Qué puedo descargar?</b></p>
+    <ul class="feature-list">
+      <li>Videos de YouTube en 360p hasta 1080p</li>
+      <li>Audio MP3 con 1 click</li>
+      <li>Links directos con Requests</li>
+    </ul>
+  </div>
+
+  <div class="bubble">
+    <p><b>Descárgame ahora mismo:</b></p>
+    <!-- BOTON DIRECTO AL INSTALLER.EXE -->
+    <a href="https://github.com/Doriogamer/DownloaderMD/releases/download/1.0/installer.exe" class="btn-whatsapp">⬇️ Descargar para Windows (x64)</a>
+    
+  </div>
+
+
+
+  <div class="bubble">
+    <p>Hecho con ❤️ por <b>Doriogamer</b><br>
+    Motor: <code>yt-dlp</code> | Licencia: MIT</p>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 DownloaderMD - Estilo WhatsApp
+</footer>
+
+</body>
+</html>
