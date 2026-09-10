@@ -5,7 +5,7 @@ Interfaz gráfica moderna. Funciona en Windows 10+. ¡Rápido, fácil y sin comp
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.1-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
@@ -17,7 +17,7 @@ Interfaz gráfica moderna. Funciona en Windows 10+. ¡Rápido, fácil y sin comp
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo
 - **🎨 Interfaz moderna**: GUI estilo WhatsApp, intuitiva y bonita
 - **⚡ Rápido**: Optimizado para descargas veloces
-- **💻 Multiplataforma**: Windows 10+ (Linux y macOS en desarrollo)
+- **💻 Multiplataforma**: Windows, Linux y macOS (configuración guardada en la carpeta de datos del sistema)
 
 ---
 
@@ -98,8 +98,10 @@ python main.py "https://ejemplo.com/archivo.zip" --output "./Descargas"
 ## 📦 Dependencias
 
 ```
-yt-dlp>=2024.1.0     # Para descargas de YouTube
-requests>=2.28.0     # Para descargas HTTP
+yt-dlp>=2025.1.0     # YouTube y sitios compatibles
+requests>=2.31.0     # Descargas HTTP
+customtkinter>=5.2.0 # Interfaz gráfica
+Pillow>=10.0.0       # Iconos e imágenes
 ```
 
 Todas se instalan automáticamente con:
@@ -160,7 +162,7 @@ Este proyecto está bajo la licencia **MIT**. Ver [LICENSE](LICENSE) para más d
 
 ---
 
-## 🙋 Soporte
+## 🤷 Soporte
 
 ¿Tienes problemas o preguntas?
 
@@ -181,8 +183,8 @@ Si DownloaderMD te sirvió, **dame una estrella** ⭐ en GitHub. ¡Te motiva a s
 
 - [ ] Soporte para TikTok, Instagram, Twitter
 - [ ] Descarga de playlists completas de YouTube
-- [ ] Soporte para Linux y macOS
-- [ ] Modo oscuro/claro configurable
+- [x] Soporte para Linux y macOS (rutas de configuración)
+- [x] Modo oscuro/claro configurable
 - [ ] Historial de descargas
 - [ ] Descargas múltiples simultáneas
 - [ ] Conversión de formatos
