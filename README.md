@@ -5,14 +5,15 @@ Interfaz gráfica moderna. Funciona en Windows 10+. ¡Rápido, fácil y sin comp
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.1-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.2-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Características
 
-- **📺 YouTube**: Descarga videos en 360p, 480p, 720p, 1080p
+- **📺 YouTube y más**: YouTube, TikTok, Instagram, X/Twitter, Facebook, Vimeo y otros sitios compatibles con yt-dlp
+- **📃 Playlists**: Descarga listas de reproducción (se puede desactivar en Ajustes)
 - **🎵 MP3**: Extrae solo el audio de YouTube con un click
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo
 - **🎨 Interfaz moderna**: GUI estilo WhatsApp, intuitiva y bonita
@@ -181,11 +182,11 @@ Si DownloaderMD te sirvió, **dame una estrella** ⭐ en GitHub. ¡Te motiva a s
 
 ## 🎯 Roadmap (Próximas versiones)
 
-- [ ] Soporte para TikTok, Instagram, Twitter
-- [ ] Descarga de playlists completas de YouTube
+- [x] Soporte para TikTok, Instagram, Twitter/X
+- [x] Descarga de playlists completas de YouTube
 - [x] Soporte para Linux y macOS (rutas de configuración)
 - [x] Modo oscuro/claro configurable
-- [ ] Historial de descargas
+- [x] Historial de descargas
 - [ ] Descargas múltiples simultáneas
 - [ ] Conversión de formatos
 
