@@ -1,36 +1,19 @@
-# Cómo funciona downloader.py (v1.1.0)
+# Cómo funciona downloader.py (v1.2.0)
 
-El archivo `downloader.py` es un **bootstrap** ligero que carga el código completo desde los archivos `dl_part0.b64`, `dl_part1.b64` y `dl_part2.b64` (gzip + base64).
+A partir de la v1.2 el código fuente completo vive otra vez en `downloader.py`.
+Los archivos `dl_part*.b64` de la v1.1 ya no se usan.
 
-## Por qué está así
-
-GitHub tiene límites de tamaño en algunas operaciones de API. Para poder subir el código completo de ~55 KB se dividió en partes.
-
-## Cómo obtener el código fuente completo
+## Ejecutar
 
 ```bash
-# Desde el repositorio clonado:
-python3 -c "
-import gzip, base64, pathlib, glob
-parts = sorted(glob.glob('dl_part*.b64'))
-payload = ''.join(pathlib.Path(p).read_text().strip() for p in parts)
-data = gzip.decompress(base64.b64decode(payload))
-pathlib.Path('downloader_full.py').write_bytes(data)
-print('Escrito downloader_full.py (' + str(len(data)) + ' bytes)')
-"
-```
-
-O simplemente ejecuta:
-
-```bash
+pip install -r requirements.txt
 python main.py
 ```
 
-El bootstrap carga y ejecuta el código completo en memoria.
+CLI:
 
-## Contenido de la v1.1.0
+```bash
+python main.py "https://www.youtube.com/watch?v=..." --format mp3 --output ./Descargas
+```
 
-- Rutas de configuración portables (Windows / Linux / macOS)
-- Soporte para `music.youtube.com` y `m.youtube.com`
-- `main.py` como punto de entrada
-- Dependencias actualizadas
+El historial se guarda en la carpeta de configuración del sistema (`history.json`).
