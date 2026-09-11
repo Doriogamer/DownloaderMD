@@ -1,7 +1,6 @@
 # Cómo funciona downloader.py (v1.2.0)
 
-A partir de la v1.2 el código fuente completo vive otra vez en `downloader.py`.
-Los archivos `dl_part*.b64` de la v1.1 ya no se usan.
+El archivo `downloader.py` es un bootstrap que carga el código desde `dl_part0.b64` … `dl_part3.b64` (gzip + base64).
 
 ## Ejecutar
 
@@ -16,4 +15,4 @@ CLI:
 python main.py "https://www.youtube.com/watch?v=..." --format mp3 --output ./Descargas
 ```
 
-El historial se guarda en la carpeta de configuración del sistema (`history.json`).
+Novedades 1.2: TikTok/Instagram/X, playlists, historial (`history.json`) y CLI con `--format` / `--quality` / `--output` / `--no-playlist`.

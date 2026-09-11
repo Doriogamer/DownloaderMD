@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.1.0 — carga el código desde dl_part*.b64"""
+"""DownloaderMD v1.2.0 — carga el código desde dl_part*.b64"""
 import gzip, base64, pathlib
 
 _here = pathlib.Path(__file__).resolve().parent
