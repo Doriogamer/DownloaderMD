@@ -1,6 +1,6 @@
-# Cómo funciona downloader.py
+# Como funciona downloader.py
 
-`downloader.py` es ahora el código fuente completo y legible (v1.2.0).
+`downloader.py` es el codigo fuente completo y legible (v1.2.2).
 
 Los archivos `dl_part*.b64` quedan como respaldo del motor anterior. Ya no son necesarios para ejecutar la app.
 
