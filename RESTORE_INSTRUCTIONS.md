@@ -1,8 +1,8 @@
 # Como funciona downloader.py
 
-`downloader.py` es el codigo fuente completo y legible (v1.2.2).
+`downloader.py` es el codigo fuente completo y legible (v1.3.0).
 
-Los archivos `dl_part*.b64` quedan como respaldo del motor anterior. Ya no son necesarios para ejecutar la app.
+Los archivos `dl_part*.b64` quedan como respaldo del motor 1.1. Ya no son necesarios para ejecutar la app.
 
 ```bash
 pip install -r requirements.txt
