@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.4.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.5.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -12,7 +12,6 @@ import urllib.parse
 
 _here = pathlib.Path(__file__).resolve().parent
 
-# Preferir engine.py (fuente abierta). Fallback: dl_part*.b64 (motor 1.1 empaquetado).
 _engine_path = _here / "engine.py"
 if _engine_path.exists():
     import engine as _engine
@@ -25,15 +24,16 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.4.0"
+APP_VERSION = "1.5.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
-    "tiktok.com", "instagram.com", "x.com", "twitter.com", "facebook.com",
-    "fb.watch", "vimeo.com", "twitch.tv", "soundcloud.com", "reddit.com",
-    "dailymotion.com", "bilibili.com", "pinterest.com", "pin.it",
+    "tiktok.com", "instagram.com", "threads.net", "x.com", "twitter.com",
+    "facebook.com", "fb.watch", "vimeo.com", "twitch.tv", "soundcloud.com",
+    "reddit.com", "dailymotion.com", "bilibili.com", "pinterest.com", "pin.it",
     "bandcamp.com", "mixcloud.com", "kick.com", "rumble.com",
+    "bsky.app", "flickr.com", "ted.com", "streamable.com", "imgur.com",
 )
 
 
@@ -98,7 +98,7 @@ def _progress_hook(d):
         print("\r    100%  procesando...                    ")
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192"):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -121,8 +121,9 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             "noplaylist": no_playlist,
             "merge_output_format": "mp4",
             "progress_hooks": [_progress_hook],
-            "retries": 5,
-            "fragment_retries": 5,
+            "retries": 8,
+            "fragment_retries": 8,
+            "ignoreerrors": False,
         }
         if cookies_from_browser:
             ydl_opts["cookiesfrombrowser"] = (cookies_from_browser,)
@@ -130,15 +131,25 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             ydl_opts["postprocessors"] = [{
                 "key": "FFmpegExtractAudio",
                 "preferredcodec": "mp3",
-                "preferredquality": "192",
+                "preferredquality": str(audio_quality),
             }]
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=True)
-            print("[+] Completado:", (info or {}).get("title", "download"))
-            append_history(url, outdir, "media")
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(url, download=True)
+                print("[+] Completado:", (info or {}).get("title", "download"))
+                append_history(url, outdir, "media")
+        except Exception as exc:
+            print("[-] Error al descargar:", exc)
+            print("    Prueba: pip install --upgrade yt-dlp")
+            print("    Si pide login: --cookies-from-browser chrome")
+            sys.exit(1)
     else:
-        response = requests.get(url, stream=True, timeout=30)
-        response.raise_for_status()
+        try:
+            response = requests.get(url, stream=True, timeout=30)
+            response.raise_for_status()
+        except Exception as exc:
+            print("[-] No se pudo descargar el archivo:", exc)
+            sys.exit(1)
         filename = os.path.basename(urllib.parse.urlparse(response.url).path) or "archivo"
         filename = re.sub(r'[\\/*?:"<>|]', "", filename)
         dest = os.path.join(outdir, filename)
@@ -165,6 +176,7 @@ def main():
     parser.add_argument("url", nargs="?", help="URL a descargar")
     parser.add_argument("--format", dest="fmt", choices=["video", "mp3"], default="video")
     parser.add_argument("--quality", default="720")
+    parser.add_argument("--audio-quality", dest="audio_quality", default="192", help="bitrate MP3: 128, 192, 256, 320")
     parser.add_argument("--output", "-o", default=None)
     parser.add_argument("--no-playlist", action="store_true")
     parser.add_argument(
@@ -173,9 +185,10 @@ def main():
         default=None,
         help="chrome, firefox, edge, brave, opera, chromium",
     )
+    parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
-        run_cli_mode(args.url, args.fmt, args.quality, args.output, args.no_playlist, args.cookies_from_browser)
+        run_cli_mode(args.url, args.fmt, args.quality, args.output, args.no_playlist, args.cookies_from_browser, args.audio_quality)
     elif extra:
         run_cli_mode(extra[0])
     else:
