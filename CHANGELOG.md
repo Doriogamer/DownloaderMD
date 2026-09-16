@@ -2,6 +2,19 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.5.0] - 2026-09-16
+
+### Agregado
+- `engine.py` en el repositorio (motor GUI de codigo abierto; ya no hace falta decodificar `dl_part*.b64`)
+- Sitios extra: Threads, Bluesky, Flickr, TED, Streamable, Imgur
+- CLI: `--audio-quality` (128/192/256/320) y `--version`
+- Mensajes de error mas claros si yt-dlp o el link fallan
+- Archivo LICENSE (MIT)
+
+### Cambiado
+- Version 1.5.0
+- Mas reintentos en descargas de media (8)
+
 ## [1.4.0] - 2026-09-15
 
 ### Agregado

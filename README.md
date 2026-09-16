@@ -5,14 +5,14 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.4.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.5.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble y otros sitios compatibles con yt-dlp
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur y otros sitios compatibles con yt-dlp
 - **📃 Playlists**: Descarga listas de reproduccion (se puede desactivar en Ajustes / `--no-playlist`)
 - **🎵 MP3**: Extrae solo el audio con un click (requiere ffmpeg)
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo
@@ -20,6 +20,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 - **💻 Multiplataforma**: Windows, Linux y macOS (configuracion en la carpeta de datos del sistema)
 - **📜 Historial**: Ultimas descargas en `history.json`
 - **🍪 Cookies del navegador**: `--cookies-from-browser chrome` (u otro) para videos que piden sesion
+- **🔓 Codigo abierto**: el motor GUI vive en `engine.py`
 
 ---
 
@@ -73,12 +74,14 @@ python main.py
 
 ```bash
 python main.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --format video --quality 720
-python main.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --format mp3 -o ./Descargas
+python main.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --format mp3 --audio-quality 320 -o ./Descargas
 python main.py "URL" --no-playlist
 python main.py "URL" --cookies-from-browser chrome
+python main.py --version
 ```
 
-Calidades: `360`, `480`, `720`, `1080`, `1440`, `2160`.
+Calidades de video: `360`, `480`, `720`, `1080`, `1440`, `2160`.  
+Calidades de audio MP3: `128`, `192`, `256`, `320`.
 
 ---
 
