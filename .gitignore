@@ -4,3 +4,9 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+
+# generado localmente
+engine.py
+*.mp3
+*.webm
+.venv/

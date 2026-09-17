@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.5.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.6.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,7 +24,7 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.5.0"
+APP_VERSION = "1.6.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
 
 MEDIA_HOSTS = (
@@ -34,6 +34,8 @@ MEDIA_HOSTS = (
     "reddit.com", "dailymotion.com", "bilibili.com", "pinterest.com", "pin.it",
     "bandcamp.com", "mixcloud.com", "kick.com", "rumble.com",
     "bsky.app", "flickr.com", "ted.com", "streamable.com", "imgur.com",
+    "linkedin.com", "vk.com", "odysee.com", "newgrounds.com", "archive.org",
+    "nicovideo.jp", "tumblr.com", "9gag.com", "truthsocial.com",
 )
 
 
@@ -98,7 +100,7 @@ def _progress_hook(d):
         print("\r    100%  procesando...                    ")
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192"):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -121,13 +123,19 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             "noplaylist": no_playlist,
             "merge_output_format": "mp4",
             "progress_hooks": [_progress_hook],
-            "retries": 8,
-            "fragment_retries": 8,
+            "retries": 10,
+            "fragment_retries": 10,
             "ignoreerrors": False,
+            "writethumbnail": write_thumbnail,
+            "writesubtitles": write_subs,
+            "writeautomaticsub": write_subs,
+            "subtitleslangs": ["es", "en", "es-orig", "en-orig"],
         }
+        if list_formats:
+            ydl_opts["listformats"] = True
         if cookies_from_browser:
             ydl_opts["cookiesfrombrowser"] = (cookies_from_browser,)
-        if fmt == "mp3":
+        if fmt == "mp3" and not list_formats:
             ydl_opts["postprocessors"] = [{
                 "key": "FFmpegExtractAudio",
                 "preferredcodec": "mp3",
@@ -135,7 +143,10 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             }]
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                info = ydl.extract_info(url, download=True)
+                info = ydl.extract_info(url, download=not list_formats)
+                if list_formats:
+                    print("[+] Formatos listados.")
+                    return
                 print("[+] Completado:", (info or {}).get("title", "download"))
                 append_history(url, outdir, "media")
         except Exception as exc:
@@ -145,7 +156,8 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             sys.exit(1)
     else:
         try:
-            response = requests.get(url, stream=True, timeout=30)
+            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
+            response = requests.get(url, stream=True, timeout=45, headers=headers)
             response.raise_for_status()
         except Exception as exc:
             print("[-] No se pudo descargar el archivo:", exc)
@@ -185,10 +197,13 @@ def main():
         default=None,
         help="chrome, firefox, edge, brave, opera, chromium",
     )
+    parser.add_argument("--subs", action="store_true", help="Descargar subtitulos si existen")
+    parser.add_argument("--thumbnail", action="store_true", help="Guardar miniatura")
+    parser.add_argument("--list-formats", action="store_true", help="Listar formatos sin descargar")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
-        run_cli_mode(args.url, args.fmt, args.quality, args.output, args.no_playlist, args.cookies_from_browser, args.audio_quality)
+        run_cli_mode(args.url, args.fmt, args.quality, args.output, args.no_playlist, args.cookies_from_browser, args.audio_quality, args.subs, args.thumbnail, args.list_formats)
     elif extra:
         run_cli_mode(extra[0])
     else:

@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.6.0] - 2026-09-17
+
+### Agregado
+- Sitios extra: LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, 9GAG, Truth Social
+- CLI: `--subs`, `--thumbnail` y `--list-formats`
+- User-Agent de navegador en descargas HTTP directas
+
+### Cambiado
+- Version 1.6.0
+- Reintentos de media subidos a 10
+
 ## [1.5.0] - 2026-09-16
 
 ### Agregado

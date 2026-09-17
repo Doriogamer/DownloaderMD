@@ -5,14 +5,14 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.5.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.6.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur y otros sitios compatibles con yt-dlp
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr y otros sitios compatibles con yt-dlp
 - **📃 Playlists**: Descarga listas de reproduccion (se puede desactivar en Ajustes / `--no-playlist`)
 - **🎵 MP3**: Extrae solo el audio con un click (requiere ffmpeg)
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo
@@ -77,6 +77,8 @@ python main.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --format video --qu
 python main.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --format mp3 --audio-quality 320 -o ./Descargas
 python main.py "URL" --no-playlist
 python main.py "URL" --cookies-from-browser chrome
+python main.py "URL" --subs --thumbnail
+python main.py "URL" --list-formats
 python main.py --version
 ```
 

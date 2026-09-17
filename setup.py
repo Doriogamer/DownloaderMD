@@ -8,7 +8,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="downloadMD",
-    version="1.5.0",
+    version="1.6.0",
     author="Doriogamer",
     author_email="dalvarezwallace2@gmail.com",
     description="Descargador universal para YouTube, MP3 y links directos",
