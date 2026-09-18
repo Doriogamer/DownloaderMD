@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.7.0] - 2026-09-18
+
+### Agregado
+- Sitios extra: BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom
+- CLI: `--proxy`, `--restrict-filenames`, `--embed-thumbnail`
+- Fragmentos concurrentes (4) y 12 reintentos en media
+- HTTP directo usa `Content-Disposition` para el nombre del archivo
+
+### Cambiado
+- Version 1.7.0
+
 ## [1.6.0] - 2026-09-17
 
 ### Agregado

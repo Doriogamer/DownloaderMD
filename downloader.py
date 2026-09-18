@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.6.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.7.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,7 +24,7 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.6.0"
+APP_VERSION = "1.7.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
 
 MEDIA_HOSTS = (
@@ -36,6 +36,8 @@ MEDIA_HOSTS = (
     "bsky.app", "flickr.com", "ted.com", "streamable.com", "imgur.com",
     "linkedin.com", "vk.com", "odysee.com", "newgrounds.com", "archive.org",
     "nicovideo.jp", "tumblr.com", "9gag.com", "truthsocial.com",
+    "bitchute.com", "peertube.tv", "mastodon.social", "gab.com",
+    "lbry.tv", "weibo.com", "youku.com", "loom.com",
 )
 
 
@@ -100,7 +102,19 @@ def _progress_hook(d):
         print("\r    100%  procesando...                    ")
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False):
+def _filename_from_headers(url, headers):
+    cd = headers.get("Content-Disposition") or headers.get("content-disposition") or ""
+    match = re.search(r"filename\*=UTF-8''([^;]+)", cd, re.I)
+    if match:
+        return urllib.parse.unquote(match.group(1))
+    match = re.search(r'filename="?([^";]+)"?', cd, re.I)
+    if match:
+        return match.group(1)
+    name = os.path.basename(urllib.parse.urlparse(url).path) or "archivo"
+    return name
+
+
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -123,24 +137,34 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             "noplaylist": no_playlist,
             "merge_output_format": "mp4",
             "progress_hooks": [_progress_hook],
-            "retries": 10,
-            "fragment_retries": 10,
+            "retries": 12,
+            "fragment_retries": 12,
+            "concurrent_fragment_downloads": 4,
             "ignoreerrors": False,
-            "writethumbnail": write_thumbnail,
+            "writethumbnail": write_thumbnail or embed_thumbnail,
             "writesubtitles": write_subs,
             "writeautomaticsub": write_subs,
             "subtitleslangs": ["es", "en", "es-orig", "en-orig"],
+            "restrictfilenames": restrict_filenames,
         }
+        if proxy:
+            ydl_opts["proxy"] = proxy
         if list_formats:
             ydl_opts["listformats"] = True
         if cookies_from_browser:
             ydl_opts["cookiesfrombrowser"] = (cookies_from_browser,)
+        post = []
         if fmt == "mp3" and not list_formats:
-            ydl_opts["postprocessors"] = [{
+            post.append({
                 "key": "FFmpegExtractAudio",
                 "preferredcodec": "mp3",
                 "preferredquality": str(audio_quality),
-            }]
+            })
+        if embed_thumbnail and fmt == "mp3" and not list_formats:
+            post.append({"key": "FFmpegMetadata"})
+            post.append({"key": "EmbedThumbnail"})
+        if post:
+            ydl_opts["postprocessors"] = post
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=not list_formats)
@@ -162,8 +186,8 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
         except Exception as exc:
             print("[-] No se pudo descargar el archivo:", exc)
             sys.exit(1)
-        filename = os.path.basename(urllib.parse.urlparse(response.url).path) or "archivo"
-        filename = re.sub(r'[\\/*?:"<>|]', "", filename)
+        filename = _filename_from_headers(response.url, response.headers)
+        filename = re.sub(r'[\\/*?:"<>|]', "", filename).strip() or "archivo"
         dest = os.path.join(outdir, filename)
         total = int(response.headers.get("content-length") or 0)
         done = 0
@@ -199,11 +223,18 @@ def main():
     )
     parser.add_argument("--subs", action="store_true", help="Descargar subtitulos si existen")
     parser.add_argument("--thumbnail", action="store_true", help="Guardar miniatura")
+    parser.add_argument("--embed-thumbnail", action="store_true", help="Embeber miniatura en MP3")
     parser.add_argument("--list-formats", action="store_true", help="Listar formatos sin descargar")
+    parser.add_argument("--proxy", default=None, help="Proxy HTTP/SOCKS, ej. http://127.0.0.1:8080")
+    parser.add_argument("--restrict-filenames", action="store_true", help="Nombres de archivo ASCII seguros")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
-        run_cli_mode(args.url, args.fmt, args.quality, args.output, args.no_playlist, args.cookies_from_browser, args.audio_quality, args.subs, args.thumbnail, args.list_formats)
+        run_cli_mode(
+            args.url, args.fmt, args.quality, args.output, args.no_playlist,
+            args.cookies_from_browser, args.audio_quality, args.subs, args.thumbnail,
+            args.list_formats, args.proxy, args.restrict_filenames, args.embed_thumbnail,
+        )
     elif extra:
         run_cli_mode(extra[0])
     else:
