@@ -2,6 +2,19 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.8.0] - 2026-09-19
+
+### Agregado
+- Sitios extra: Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, VK Video, Coub
+- CLI: `--sponsorblock`, `--download-archive`, `--write-info-json`, `--audio-format`
+- `--format audio` ademas de `mp3`/`video`
+- Codecs de audio: mp3, m4a, opus, wav, flac
+
+### Cambiado
+- Version 1.8.0
+- User-Agent HTTP actualizado (Chrome 131)
+- Requisito `yt-dlp>=2025.9.26`
+
 ## [1.7.0] - 2026-09-18
 
 ### Agregado
