@@ -2,6 +2,18 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.9.0] - 2026-09-20
+
+### Agregado
+- Sitios extra: aliases de TikTok/Bilibili/Dailymotion/Twitch, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat
+- CLI: `--cookies` (archivo Netscape), `--max-downloads`, `--playlist-items`, `--sleep-interval`
+- Descarga HTTP con reanudacion (Range / Content-Range) si el archivo ya existe a medias
+
+### Cambiado
+- Version 1.9.0
+- User-Agent HTTP actualizado (Chrome 140)
+- Reintentos de media a 15 y 8 fragmentos concurrentes
+
 ## [1.8.0] - 2026-09-19
 
 ### Agregado

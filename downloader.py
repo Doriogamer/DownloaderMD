@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.8.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.9.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,22 +24,28 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.8.0"
+APP_VERSION = "1.9.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
-    "tiktok.com", "instagram.com", "threads.net", "x.com", "twitter.com",
-    "facebook.com", "fb.watch", "vimeo.com", "twitch.tv", "soundcloud.com",
-    "reddit.com", "dailymotion.com", "bilibili.com", "pinterest.com", "pin.it",
-    "bandcamp.com", "mixcloud.com", "kick.com", "rumble.com",
-    "bsky.app", "flickr.com", "ted.com", "streamable.com", "imgur.com",
+    "tiktok.com", "vm.tiktok.com", "vt.tiktok.com",
+    "instagram.com", "instagr.am", "threads.net", "x.com", "twitter.com",
+    "facebook.com", "fb.watch", "vimeo.com", "twitch.tv", "clips.twitch.tv",
+    "soundcloud.com", "reddit.com", "dailymotion.com", "dai.ly",
+    "bilibili.com", "bilibili.tv", "b23.tv",
+    "pinterest.com", "pin.it", "bandcamp.com", "mixcloud.com",
+    "kick.com", "rumble.com", "bsky.app", "bsky.social",
+    "flickr.com", "ted.com", "streamable.com", "imgur.com",
     "linkedin.com", "vk.com", "odysee.com", "newgrounds.com", "archive.org",
     "nicovideo.jp", "tumblr.com", "9gag.com", "truthsocial.com",
     "bitchute.com", "peertube.tv", "mastodon.social", "gab.com",
     "lbry.tv", "weibo.com", "youku.com", "loom.com",
     "snapchat.com", "douyin.com", "ixigua.com", "rutube.ru", "ok.ru",
     "dzen.ru", "vkvideo.ru", "coub.com",
+    "patreon.com", "substack.com", "podcasts.apple.com", "nebula.tv",
+    "floatplane.com", "aparat.com", "niconico.com",
 )
 
 
@@ -116,7 +122,56 @@ def _filename_from_headers(url, headers):
     return name
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3"):
+def _http_download(url, outdir):
+    headers = {"User-Agent": HTTP_UA}
+    dest_name = None
+    dest = None
+    resume_from = 0
+    head = requests.head(url, timeout=30, headers=headers, allow_redirects=True)
+    final_url = head.url if head.ok else url
+    dest_name = _filename_from_headers(final_url, head.headers if head.ok else {})
+    dest_name = re.sub(r'[\\/*?:"<>|]', "", dest_name).strip() or "archivo"
+    dest = os.path.join(outdir, dest_name)
+    if os.path.exists(dest):
+        resume_from = os.path.getsize(dest)
+        headers["Range"] = "bytes=%d-" % resume_from
+    try:
+        response = requests.get(url, stream=True, timeout=45, headers=headers)
+        if response.status_code == 416:
+            print("[+] Ya estaba completo:", dest)
+            return dest
+        response.raise_for_status()
+    except Exception as exc:
+        print("[-] No se pudo descargar el archivo:", exc)
+        sys.exit(1)
+    if response.status_code != 206:
+        resume_from = 0
+        dest_name = _filename_from_headers(response.url, response.headers)
+        dest_name = re.sub(r'[\\/*?:"<>|]', "", dest_name).strip() or "archivo"
+        dest = os.path.join(outdir, dest_name)
+    total = int(response.headers.get("content-length") or 0)
+    if resume_from and response.status_code == 206:
+        cr = response.headers.get("Content-Range") or ""
+        m = re.search(r"/(\d+)", cr)
+        if m:
+            total = int(m.group(1))
+        else:
+            total += resume_from
+    mode = "ab" if resume_from and response.status_code == 206 else "wb"
+    done = resume_from
+    with open(dest, mode) as f:
+        for chunk in response.iter_content(chunk_size=65536):
+            if chunk:
+                f.write(chunk)
+                done += len(chunk)
+                if total:
+                    print("\r    %.1f%%" % (100.0 * done / total), end="", flush=True)
+    print()
+    print("[+] Guardado:", dest)
+    return dest
+
+
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -126,7 +181,6 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
     os.makedirs(outdir, exist_ok=True)
     if is_media_url(url) or is_youtube_url(url):
         qmap = {"360": 360, "480": 480, "720": 720, "1080": 1080, "1440": 1440, "2160": 2160}
-        audio_mode = fmt in ("mp3", "audio") or audio_format in ("m4a", "opus", "wav", "flac") and fmt != "video"
         if fmt in ("mp3", "audio"):
             yfmt = "bestaudio/best"
         elif str(quality) in qmap:
@@ -140,9 +194,9 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             "noplaylist": no_playlist,
             "merge_output_format": "mp4",
             "progress_hooks": [_progress_hook],
-            "retries": 12,
-            "fragment_retries": 12,
-            "concurrent_fragment_downloads": 4,
+            "retries": 15,
+            "fragment_retries": 15,
+            "concurrent_fragment_downloads": 8,
             "ignoreerrors": False,
             "writethumbnail": write_thumbnail or embed_thumbnail,
             "writesubtitles": write_subs,
@@ -157,8 +211,17 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             ydl_opts["listformats"] = True
         if cookies_from_browser:
             ydl_opts["cookiesfrombrowser"] = (cookies_from_browser,)
+        if cookies:
+            ydl_opts["cookiefile"] = cookies
         if download_archive:
             ydl_opts["download_archive"] = download_archive
+        if max_downloads:
+            ydl_opts["max_downloads"] = int(max_downloads)
+        if playlist_items:
+            ydl_opts["playlist_items"] = playlist_items
+        if sleep_interval is not None:
+            ydl_opts["sleep_interval"] = float(sleep_interval)
+            ydl_opts["max_sleep_interval"] = float(sleep_interval) + 2
         if sponsorblock:
             ydl_opts["sponsorblock_remove"] = ["sponsor", "selfpromo", "interaction"]
         post = []
@@ -185,30 +248,10 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
         except Exception as exc:
             print("[-] Error al descargar:", exc)
             print("    Prueba: pip install --upgrade yt-dlp")
-            print("    Si pide login: --cookies-from-browser chrome")
+            print("    Si pide login: --cookies-from-browser chrome  o  --cookies cookies.txt")
             sys.exit(1)
     else:
-        try:
-            headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
-            response = requests.get(url, stream=True, timeout=45, headers=headers)
-            response.raise_for_status()
-        except Exception as exc:
-            print("[-] No se pudo descargar el archivo:", exc)
-            sys.exit(1)
-        filename = _filename_from_headers(response.url, response.headers)
-        filename = re.sub(r'[\\/*?:"<>|]', "", filename).strip() or "archivo"
-        dest = os.path.join(outdir, filename)
-        total = int(response.headers.get("content-length") or 0)
-        done = 0
-        with open(dest, "wb") as f:
-            for chunk in response.iter_content(chunk_size=65536):
-                if chunk:
-                    f.write(chunk)
-                    done += len(chunk)
-                    if total:
-                        print("\r    %.1f%%" % (100.0 * done / total), end="", flush=True)
-        print()
-        print("[+] Guardado:", dest)
+        dest = _http_download(url, outdir)
         append_history(url, dest, "http")
 
 
@@ -231,6 +274,7 @@ def main():
         default=None,
         help="chrome, firefox, edge, brave, opera, chromium",
     )
+    parser.add_argument("--cookies", default=None, help="Archivo Netscape de cookies")
     parser.add_argument("--subs", action="store_true", help="Descargar subtitulos si existen")
     parser.add_argument("--thumbnail", action="store_true", help="Guardar miniatura")
     parser.add_argument("--embed-thumbnail", action="store_true", help="Embeber miniatura en audio")
@@ -240,6 +284,9 @@ def main():
     parser.add_argument("--sponsorblock", action="store_true", help="Quitar segmentos sponsor/selfpromo/interaction")
     parser.add_argument("--download-archive", dest="download_archive", default=None, help="Archivo de IDs ya descargados")
     parser.add_argument("--write-info-json", action="store_true", help="Guardar metadata .info.json")
+    parser.add_argument("--max-downloads", dest="max_downloads", default=None, help="Limite de items en playlist")
+    parser.add_argument("--playlist-items", dest="playlist_items", default=None, help="Items de playlist, ej. 1-5,8")
+    parser.add_argument("--sleep-interval", dest="sleep_interval", default=None, help="Pausa entre items (segundos)")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -248,6 +295,7 @@ def main():
             args.cookies_from_browser, args.audio_quality, args.subs, args.thumbnail,
             args.list_formats, args.proxy, args.restrict_filenames, args.embed_thumbnail,
             args.sponsorblock, args.download_archive, args.write_info_json, args.audio_format,
+            args.cookies, args.max_downloads, args.playlist_items, args.sleep_interval,
         )
     elif extra:
         run_cli_mode(extra[0])
