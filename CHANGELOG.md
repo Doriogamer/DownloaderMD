@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.10.0] - 2026-09-21
+
+### Agregado
+- Sitios extra: aliases de YouTube/Facebook/Reddit/Threads, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP
+- CLI: `--embed-subs`, `--merge-format` (mp4/mkv/webm), `--retries`, `--no-mtime`, `--geo-bypass`
+
+### Cambiado
+- Version 1.10.0
+- User-Agent HTTP actualizado (Chrome 141)
+- Reintentos de media a 18 y 10 fragmentos concurrentes
+
 ## [1.9.0] - 2026-09-20
 
 ### Agregado
