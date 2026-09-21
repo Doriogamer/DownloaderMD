@@ -5,14 +5,14 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.9.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.10.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat y otros sitios compatibles con yt-dlp
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP y otros sitios compatibles con yt-dlp
 - **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--playlist-items`, `--max-downloads`)
 - **🎵 Audio**: Extrae audio en mp3, m4a, opus, wav o flac (requiere ffmpeg). Opcional: `--embed-thumbnail`
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo (usa el nombre de `Content-Disposition` si existe). Reanuda si el archivo ya existe a medias
@@ -23,6 +23,8 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 - **🔒 Proxy**: `--proxy http://127.0.0.1:8080`
 - **⛔ SponsorBlock**: `--sponsorblock` quita anuncios embebidos en YouTube
 - **📋 Archivo de descargas**: `--download-archive ids.txt` evita repetir videos
+- **🌍 Geo-bypass**: `--geo-bypass` intenta saltar bloqueos de region
+- **🎬 Contenedor**: `--merge-format mp4|mkv|webm` y `--embed-subs`
 - **🔓 Codigo abierto**: el motor GUI vive en `engine.py`
 
 ---
@@ -84,6 +86,7 @@ python main.py "URL" --cookies-from-browser chrome
 python main.py "URL" --cookies cookies.txt
 python main.py "URL" --subs --thumbnail
 python main.py "URL" --format mp3 --embed-thumbnail
+python main.py "URL" --embed-subs --merge-format mkv
 python main.py "URL" --proxy http://127.0.0.1:8080
 python main.py "URL" --restrict-filenames
 python main.py "URL" --sponsorblock
@@ -91,13 +94,15 @@ python main.py "URL" --download-archive ids.txt
 python main.py "URL" --write-info-json
 python main.py "URL" --max-downloads 5 --playlist-items 1-3,8
 python main.py "URL" --sleep-interval 2
+python main.py "URL" --retries 20 --geo-bypass --no-mtime
 python main.py "URL" --list-formats
 python main.py --version
 ```
 
 Calidades de video: `360`, `480`, `720`, `1080`, `1440`, `2160`.  
 Calidades de audio MP3: `128`, `192`, `256`, `320`.  
-Formatos de audio: `mp3`, `m4a`, `opus`, `wav`, `flac`.
+Formatos de audio: `mp3`, `m4a`, `opus`, `wav`, `flac`.  
+Contenedores: `mp4`, `mkv`, `webm`.
 
 ---
 
@@ -119,6 +124,7 @@ Pillow>=10.0.0
 - Actualiza yt-dlp: `pip install --upgrade yt-dlp`
 - Si el video pide login o edad: `--cookies-from-browser chrome` o `--cookies cookies.txt`
 - Si tu red bloquea el sitio: `--proxy http://127.0.0.1:8080`
+- Si hay bloqueo de region: `--geo-bypass`
 
 ### El programa no abre
 - `pip install --upgrade -r requirements.txt`
