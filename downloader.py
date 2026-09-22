@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.10.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.11.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,9 +24,9 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.10.0"
+APP_VERSION = "1.11.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
-HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36"
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
@@ -53,6 +53,10 @@ MEDIA_HOSTS = (
     "audiomack.com", "hearthis.at", "podbean.com",
     "capcut.com", "likee.video", "weverse.io",
     "chzzk.naver.com", "soop.live",
+    "trovo.live", "afreecatv.com", "tv.naver.com", "naver.com",
+    "media.ccc.de", "curiositystream.com", "dropout.tv",
+    "espn.com", "bbc.co.uk", "cnn.com", "npr.org",
+    "spotify.com", "open.spotify.com", "deezer.com",
 )
 
 
@@ -178,7 +182,7 @@ def _http_download(url, outdir):
     return dest
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -208,17 +212,33 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             "progress_hooks": [_progress_hook],
             "retries": retries_n,
             "fragment_retries": retries_n,
-            "concurrent_fragment_downloads": 10,
+            "concurrent_fragment_downloads": 12,
             "ignoreerrors": False,
             "writethumbnail": write_thumbnail or embed_thumbnail,
             "writesubtitles": write_subs or embed_subs,
             "writeautomaticsub": write_subs,
             "subtitleslangs": ["es", "en", "es-orig", "en-orig"],
             "restrictfilenames": restrict_filenames,
+            "windowsfilenames": windows_filenames,
+            "nooverwrites": no_overwrites,
+            "keepvideo": keep_video,
             "writeinfojson": write_info_json,
             "updatetime": not no_mtime,
             "geo_bypass": geo_bypass,
         }
+        try:
+            cf = int(concurrent_fragments)
+            if cf >= 1:
+                ydl_opts["concurrent_fragment_downloads"] = cf
+        except (TypeError, ValueError):
+            pass
+        if force_ipv4:
+            ydl_opts["source_address"] = "0.0.0.0"
+        if socket_timeout:
+            try:
+                ydl_opts["socket_timeout"] = float(socket_timeout)
+            except (TypeError, ValueError):
+                pass
         if proxy:
             ydl_opts["proxy"] = proxy
         if list_formats:
@@ -308,6 +328,12 @@ def main():
     parser.add_argument("--retries", default="18", help="Reintentos de red y fragmentos")
     parser.add_argument("--no-mtime", action="store_true", help="No usar fecha del servidor en el archivo")
     parser.add_argument("--geo-bypass", action="store_true", help="Intentar saltar bloqueos geograficos")
+    parser.add_argument("--windows-filenames", action="store_true", help="Nombres compatibles con Windows")
+    parser.add_argument("--no-overwrites", action="store_true", help="No sobrescribir archivos existentes")
+    parser.add_argument("--keep-video", action="store_true", help="Conservar el video original al extraer audio")
+    parser.add_argument("--force-ipv4", action="store_true", help="Forzar conexiones IPv4")
+    parser.add_argument("--socket-timeout", dest="socket_timeout", default=None, help="Timeout de socket en segundos")
+    parser.add_argument("--concurrent-fragments", dest="concurrent_fragments", default="12", help="Fragmentos HLS/DASH en paralelo")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -318,6 +344,8 @@ def main():
             args.sponsorblock, args.download_archive, args.write_info_json, args.audio_format,
             args.cookies, args.max_downloads, args.playlist_items, args.sleep_interval,
             args.embed_subs, args.merge_format, args.retries, args.no_mtime, args.geo_bypass,
+            args.windows_filenames, args.no_overwrites, args.keep_video, args.force_ipv4,
+            args.socket_timeout, args.concurrent_fragments,
         )
     elif extra:
         run_cli_mode(extra[0])
