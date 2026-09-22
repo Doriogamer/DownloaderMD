@@ -5,14 +5,14 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.10.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.11.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP y otros sitios compatibles con yt-dlp
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer y otros sitios compatibles con yt-dlp
 - **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--playlist-items`, `--max-downloads`)
 - **🎵 Audio**: Extrae audio en mp3, m4a, opus, wav o flac (requiere ffmpeg). Opcional: `--embed-thumbnail`
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo (usa el nombre de `Content-Disposition` si existe). Reanuda si el archivo ya existe a medias
@@ -25,6 +25,9 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 - **📋 Archivo de descargas**: `--download-archive ids.txt` evita repetir videos
 - **🌍 Geo-bypass**: `--geo-bypass` intenta saltar bloqueos de region
 - **🎬 Contenedor**: `--merge-format mp4|mkv|webm` y `--embed-subs`
+- **🚪 Windows names**: `--windows-filenames` y `--no-overwrites`
+- **📡 Red**: `--force-ipv4`, `--socket-timeout`, `--concurrent-fragments`
+- **🎧 Keep video**: `--keep-video` conserva el original al extraer audio
 - **🔓 Codigo abierto**: el motor GUI vive en `engine.py`
 
 ---
@@ -95,6 +98,10 @@ python main.py "URL" --write-info-json
 python main.py "URL" --max-downloads 5 --playlist-items 1-3,8
 python main.py "URL" --sleep-interval 2
 python main.py "URL" --retries 20 --geo-bypass --no-mtime
+python main.py "URL" --windows-filenames --no-overwrites
+python main.py "URL" --format mp3 --keep-video
+python main.py "URL" --force-ipv4 --socket-timeout 30
+python main.py "URL" --concurrent-fragments 16
 python main.py "URL" --list-formats
 python main.py --version
 ```
@@ -109,7 +116,7 @@ Contenedores: `mp4`, `mkv`, `webm`.
 ## 📦 Dependencias
 
 ```
-yt-dlp>=2025.9.26
+yt-dlp>=2026.8.19
 requests>=2.31.0
 customtkinter>=5.2.0
 Pillow>=10.0.0
