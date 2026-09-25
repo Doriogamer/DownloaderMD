@@ -1,6 +1,6 @@
 # Como funciona DownloaderMD
 
-`downloader.py` anade deteccion de sitios, historial, CLI y version 1.10.
+`downloader.py` anade deteccion de sitios, historial, CLI y version 1.12.
 El motor GUI esta en `engine.py`. Si no existe, se decodifican `dl_part*.b64`.
 
 ```bash
@@ -21,5 +21,6 @@ python main.py "URL" --embed-subs --merge-format mkv
 python main.py "URL" --list-formats
 python main.py "URL" --max-downloads 5 --playlist-items 1-3
 python main.py "URL" --retries 20 --geo-bypass
+python main.py "URL" --ignore-errors --write-description
 python main.py --version
 ```

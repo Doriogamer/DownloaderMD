@@ -2,6 +2,16 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.12.0] - 2026-09-25
+
+### Agregado
+- Sitios extra: Tidal, Apple Music, BandLab, Pixiv, live.nicovideo.jp, Crunchyroll
+- CLI: `--ignore-errors`, `--write-description`
+
+### Cambiado
+- Version 1.12.0
+- User-Agent HTTP actualizado (Chrome 143)
+
 ## [1.11.0] - 2026-09-22
 
 ### Agregado
