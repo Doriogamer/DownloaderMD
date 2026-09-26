@@ -2,6 +2,16 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.13.0] - 2026-09-26
+
+### Agregado
+- Sitios extra: Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera
+- CLI: `--write-comments`, `--break-on-existing`, `--live-from-start`, `--yes-playlist`
+
+### Cambiado
+- Version 1.13.0
+- User-Agent HTTP actualizado (Chrome 144)
+
 ## [1.12.0] - 2026-09-25
 
 ### Agregado
