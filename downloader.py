@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.12.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.13.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,9 +24,9 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.12.0"
+APP_VERSION = "1.13.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
-HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
@@ -60,6 +60,13 @@ MEDIA_HOSTS = (
     "tidal.com", "music.apple.com", "bandlab.com",
     "pixiv.net", "live.nicovideo.jp",
     "crunchyroll.com", "funimation.com",
+    "xiaohongshu.com", "xhslink.com",
+    "abema.tv", "abema.io",
+    "arte.tv", "jiosaavn.com",
+    "vocaroo.com", "openrec.tv",
+    "showroom-live.com", "17.live",
+    "acfun.cn", "drive.google.com",
+    "dropbox.com", "aljazeera.com",
 )
 
 
@@ -185,7 +192,7 @@ def _http_download(url, outdir):
     return dest
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -210,7 +217,7 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
         ydl_opts = {
             "outtmpl": os.path.join(outdir, "%(title)s.%(ext)s"),
             "format": yfmt,
-            "noplaylist": no_playlist,
+            "noplaylist": False if yes_playlist else no_playlist,
             "merge_output_format": merge,
             "progress_hooks": [_progress_hook],
             "retries": retries_n,
@@ -218,6 +225,9 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             "concurrent_fragment_downloads": 12,
             "ignoreerrors": ignore_errors,
             "writedescription": write_description,
+            "getcomments": write_comments,
+            "break_on_existing": break_on_existing,
+            "live_from_start": live_from_start,
             "writethumbnail": write_thumbnail or embed_thumbnail,
             "writesubtitles": write_subs or embed_subs,
             "writeautomaticsub": write_subs,
@@ -340,6 +350,10 @@ def main():
     parser.add_argument("--concurrent-fragments", dest="concurrent_fragments", default="12", help="Fragmentos HLS/DASH en paralelo")
     parser.add_argument("--ignore-errors", action="store_true", help="Continuar si falla un item de playlist")
     parser.add_argument("--write-description", action="store_true", help="Guardar descripcion .description")
+    parser.add_argument("--write-comments", action="store_true", help="Guardar comentarios si el extractor los ofrece")
+    parser.add_argument("--break-on-existing", action="store_true", help="Parar si el archivo ya esta en el archive")
+    parser.add_argument("--live-from-start", action="store_true", help="En lives, empezar desde el inicio si es posible")
+    parser.add_argument("--yes-playlist", action="store_true", help="Forzar descarga de playlist completa")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -352,7 +366,8 @@ def main():
             args.embed_subs, args.merge_format, args.retries, args.no_mtime, args.geo_bypass,
             args.windows_filenames, args.no_overwrites, args.keep_video, args.force_ipv4,
             args.socket_timeout, args.concurrent_fragments, args.ignore_errors,
-            args.write_description,
+            args.write_description, args.write_comments, args.break_on_existing,
+            args.live_from_start, args.yes_playlist,
         )
     elif extra:
         run_cli_mode(extra[0])
