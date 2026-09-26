@@ -5,15 +5,15 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.12.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.13.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll y otros sitios compatibles con yt-dlp
-- **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--playlist-items`, `--max-downloads`)
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera y otros sitios compatibles con yt-dlp
+- **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--yes-playlist`, `--playlist-items`, `--max-downloads`)
 - **🎵 Audio**: Extrae audio en mp3, m4a, opus, wav o flac (requiere ffmpeg). Opcional: `--embed-thumbnail`
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo (usa el nombre de `Content-Disposition` si existe). Reanuda si el archivo ya existe a medias
 - **🎨 Interfaz moderna**: GUI estilo chat, intuitiva
@@ -29,6 +29,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 - **📡 Red**: `--force-ipv4`, `--socket-timeout`, `--concurrent-fragments`
 - **🎧 Keep video**: `--keep-video` conserva el original al extraer audio
 - **🔓 Playlists robustas**: `--ignore-errors` y `--write-description`
+- **💬 Comentarios y lives**: `--write-comments`, `--break-on-existing`, `--live-from-start`
 - **🔓 Codigo abierto**: el motor GUI vive en `engine.py`
 
 ---
@@ -86,6 +87,7 @@ python main.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --format video --qu
 python main.py "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --format mp3 --audio-quality 320 -o ./Descargas
 python main.py "URL" --format audio --audio-format m4a
 python main.py "URL" --no-playlist
+python main.py "URL" --yes-playlist
 python main.py "URL" --cookies-from-browser chrome
 python main.py "URL" --cookies cookies.txt
 python main.py "URL" --subs --thumbnail
@@ -104,6 +106,8 @@ python main.py "URL" --format mp3 --keep-video
 python main.py "URL" --force-ipv4 --socket-timeout 30
 python main.py "URL" --concurrent-fragments 16
 python main.py "URL" --ignore-errors --write-description
+python main.py "URL" --write-comments --break-on-existing
+python main.py "URL" --live-from-start
 python main.py "URL" --list-formats
 python main.py --version
 ```
