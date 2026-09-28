@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.13.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.14.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,9 +24,9 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.13.0"
+APP_VERSION = "1.14.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
-HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
@@ -67,6 +67,12 @@ MEDIA_HOSTS = (
     "showroom-live.com", "17.live",
     "acfun.cn", "drive.google.com",
     "dropbox.com", "aljazeera.com",
+    "mega.nz", "mega.co.nz", "mediafire.com",
+    "onedrive.live.com", "1drv.ms", "box.com",
+    "deviantart.com", "artstation.com", "last.fm",
+    "ivoox.com", "youtubekids.com", "music.amazon.com",
+    "misskey.io", "kwai.com", "streamyard.com",
+    "soundgasm.net", "wetransfer.com",
 )
 
 
@@ -192,7 +198,7 @@ def _http_download(url, outdir):
     return dest
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -228,6 +234,10 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             "getcomments": write_comments,
             "break_on_existing": break_on_existing,
             "live_from_start": live_from_start,
+            "nopart": no_part,
+            "prefer_free_formats": prefer_free_formats,
+            "quiet": quiet,
+            "verbose": verbose,
             "writethumbnail": write_thumbnail or embed_thumbnail,
             "writesubtitles": write_subs or embed_subs,
             "writeautomaticsub": write_subs,
@@ -248,6 +258,8 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             pass
         if force_ipv4:
             ydl_opts["source_address"] = "0.0.0.0"
+        if force_ipv6:
+            ydl_opts["source_address"] = "::"
         if socket_timeout:
             try:
                 ydl_opts["socket_timeout"] = float(socket_timeout)
@@ -285,6 +297,8 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             post.append({"key": "EmbedThumbnail"})
         if embed_subs and fmt == "video" and not list_formats:
             post.append({"key": "FFmpegEmbedSubtitle"})
+        if add_metadata and not list_formats:
+            post.append({"key": "FFmpegMetadata"})
         if post:
             ydl_opts["postprocessors"] = post
         try:
@@ -354,6 +368,12 @@ def main():
     parser.add_argument("--break-on-existing", action="store_true", help="Parar si el archivo ya esta en el archive")
     parser.add_argument("--live-from-start", action="store_true", help="En lives, empezar desde el inicio si es posible")
     parser.add_argument("--yes-playlist", action="store_true", help="Forzar descarga de playlist completa")
+    parser.add_argument("--add-metadata", action="store_true", help="Escribir metadatos en el archivo con ffmpeg")
+    parser.add_argument("--no-part", action="store_true", help="No usar archivos .part temporales")
+    parser.add_argument("--prefer-free-formats", action="store_true", help="Preferir formatos libres (webm/opus)")
+    parser.add_argument("--quiet", action="store_true", help="Menos salida en consola")
+    parser.add_argument("--verbose", action="store_true", help="Mas detalle de yt-dlp")
+    parser.add_argument("--force-ipv6", action="store_true", help="Forzar conexiones IPv6")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -367,7 +387,8 @@ def main():
             args.windows_filenames, args.no_overwrites, args.keep_video, args.force_ipv4,
             args.socket_timeout, args.concurrent_fragments, args.ignore_errors,
             args.write_description, args.write_comments, args.break_on_existing,
-            args.live_from_start, args.yes_playlist,
+            args.live_from_start, args.yes_playlist, args.add_metadata, args.no_part,
+            args.prefer_free_formats, args.quiet, args.verbose, args.force_ipv6,
         )
     elif extra:
         run_cli_mode(extra[0])
