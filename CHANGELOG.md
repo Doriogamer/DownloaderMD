@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.14.0] - 2026-09-28
+
+### Agregado
+- Sitios extra: Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer
+- CLI: `--add-metadata`, `--no-part`, `--prefer-free-formats`, `--quiet`, `--verbose`, `--force-ipv6`
+
+### Cambiado
+- Version 1.14.0
+- User-Agent HTTP actualizado (Chrome 145)
+- setup.py alineado a 1.14.0
+
 ## [1.13.0] - 2026-09-26
 
 ### Agregado
