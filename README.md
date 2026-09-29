@@ -5,14 +5,14 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.14.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.15.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera, Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer y otros sitios compatibles con yt-dlp
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera, Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer, Giphy, Tenor, PBS, NBC, Reuters, NHK, Yandex Music, Anghami, Radio Javan, Discord, Streamja y otros sitios compatibles con yt-dlp
 - **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--yes-playlist`, `--playlist-items`, `--max-downloads`)
 - **🎵 Audio**: Extrae audio en mp3, m4a, opus, wav o flac (requiere ffmpeg). Opcional: `--embed-thumbnail`
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo (usa el nombre de `Content-Disposition` si existe). Reanuda si el archivo ya existe a medias
@@ -31,6 +31,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 - **🔓 Playlists robustas**: `--ignore-errors` y `--write-description`
 - **💬 Comentarios y lives**: `--write-comments`, `--break-on-existing`, `--live-from-start`
 - **🧳 Extra CLI**: `--add-metadata`, `--no-part`, `--prefer-free-formats`, `--quiet`, `--verbose`, `--force-ipv6`
+- **🛡️ TLS y playlists**: `--no-check-certificates`, `--age-limit`, `--playlist-start`, `--playlist-end`, `--skip-unavailable-fragments`, `--no-warnings`
 - **🔓 Codigo abierto**: el motor GUI vive en `engine.py`
 
 ---
@@ -112,6 +113,10 @@ python main.py "URL" --live-from-start
 python main.py "URL" --add-metadata --no-part
 python main.py "URL" --prefer-free-formats --quiet
 python main.py "URL" --verbose --force-ipv6
+python main.py "URL" --no-check-certificates --no-warnings
+python main.py "URL" --age-limit 18
+python main.py "URL" --playlist-start 2 --playlist-end 10
+python main.py "URL" --skip-unavailable-fragments
 python main.py "URL" --list-formats
 python main.py --version
 ```
