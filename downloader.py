@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.14.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.15.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,9 +24,9 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.14.0"
+APP_VERSION = "1.15.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
-HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
@@ -73,6 +73,10 @@ MEDIA_HOSTS = (
     "ivoox.com", "youtubekids.com", "music.amazon.com",
     "misskey.io", "kwai.com", "streamyard.com",
     "soundgasm.net", "wetransfer.com",
+    "giphy.com", "tenor.com", "pbs.org", "nbc.com",
+    "reuters.com", "nhk.or.jp", "music.yandex.ru", "yandex.ru",
+    "anghami.com", "radiojavan.com", "discord.com", "cdn.discordapp.com",
+    "streamja.com", "streamable.com",
 )
 
 
@@ -198,7 +202,7 @@ def _http_download(url, outdir):
     return dest
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -238,6 +242,8 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             "prefer_free_formats": prefer_free_formats,
             "quiet": quiet,
             "verbose": verbose,
+            "nocheckcertificate": no_check_certificates,
+            "no_warnings": no_warnings,
             "writethumbnail": write_thumbnail or embed_thumbnail,
             "writesubtitles": write_subs or embed_subs,
             "writeautomaticsub": write_subs,
@@ -260,6 +266,23 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             ydl_opts["source_address"] = "0.0.0.0"
         if force_ipv6:
             ydl_opts["source_address"] = "::"
+        if age_limit not in (None, ""):
+            try:
+                ydl_opts["age_limit"] = int(age_limit)
+            except (TypeError, ValueError):
+                pass
+        if playlist_start not in (None, ""):
+            try:
+                ydl_opts["playliststart"] = int(playlist_start)
+            except (TypeError, ValueError):
+                pass
+        if playlist_end not in (None, ""):
+            try:
+                ydl_opts["playlistend"] = int(playlist_end)
+            except (TypeError, ValueError):
+                pass
+        if skip_unavailable_fragments:
+            ydl_opts["skip_unavailable_fragments"] = True
         if socket_timeout:
             try:
                 ydl_opts["socket_timeout"] = float(socket_timeout)
@@ -374,6 +397,12 @@ def main():
     parser.add_argument("--quiet", action="store_true", help="Menos salida en consola")
     parser.add_argument("--verbose", action="store_true", help="Mas detalle de yt-dlp")
     parser.add_argument("--force-ipv6", action="store_true", help="Forzar conexiones IPv6")
+    parser.add_argument("--no-check-certificates", action="store_true", help="No verificar certificados TLS")
+    parser.add_argument("--age-limit", dest="age_limit", default=None, help="Limite de edad para contenido restringido")
+    parser.add_argument("--playlist-start", dest="playlist_start", default=None, help="Primer item de playlist")
+    parser.add_argument("--playlist-end", dest="playlist_end", default=None, help="Ultimo item de playlist")
+    parser.add_argument("--skip-unavailable-fragments", action="store_true", help="Saltar fragmentos HLS/DASH faltantes")
+    parser.add_argument("--no-warnings", action="store_true", help="Ocultar avisos de yt-dlp")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -389,6 +418,8 @@ def main():
             args.write_description, args.write_comments, args.break_on_existing,
             args.live_from_start, args.yes_playlist, args.add_metadata, args.no_part,
             args.prefer_free_formats, args.quiet, args.verbose, args.force_ipv6,
+            args.no_check_certificates, args.age_limit, args.playlist_start,
+            args.playlist_end, args.skip_unavailable_fragments, args.no_warnings,
         )
     elif extra:
         run_cli_mode(extra[0])
