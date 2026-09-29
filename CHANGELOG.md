@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.15.0] - 2026-09-29
+
+### Agregado
+- Sitios extra: Giphy, Tenor, PBS, NBC, Reuters, NHK, Yandex Music, Anghami, Radio Javan, Discord CDN, Streamja
+- CLI: `--no-check-certificates`, `--age-limit`, `--playlist-start`, `--playlist-end`, `--skip-unavailable-fragments`, `--no-warnings`
+
+### Cambiado
+- Version 1.15.0
+- User-Agent HTTP actualizado (Chrome 146)
+- setup.py alineado a 1.15.0
+
 ## [1.14.0] - 2026-09-28
 
 ### Agregado
