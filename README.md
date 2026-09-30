@@ -5,14 +5,14 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.15.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.16.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera, Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer, Giphy, Tenor, PBS, NBC, Reuters, NHK, Yandex Music, Anghami, Radio Javan, Discord, Streamja y otros sitios compatibles con yt-dlp
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera, Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer, Giphy, Tenor, PBS, NBC, Reuters, NHK, Yandex Music, Anghami, Radio Javan, Discord, Streamja, Anchor, Castbox, Pocket Casts, Scribd, SlideShare y otros sitios compatibles con yt-dlp
 - **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--yes-playlist`, `--playlist-items`, `--max-downloads`)
 - **🎵 Audio**: Extrae audio en mp3, m4a, opus, wav o flac (requiere ffmpeg). Opcional: `--embed-thumbnail`
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo (usa el nombre de `Content-Disposition` si existe). Reanuda si el archivo ya existe a medias
@@ -132,9 +132,9 @@ Contenedores: `mp4`, `mkv`, `webm`.
 
 ```
 yt-dlp>=2026.8.19
-requests>=2.31.0
+requests>=2.32.0
 customtkinter>=5.2.0
-Pillow>=10.0.0
+Pillow>=10.4.0
 ```
 
 ---
