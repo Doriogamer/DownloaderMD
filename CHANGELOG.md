@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.16.0] - 2026-09-30
+
+### Agregado
+- Sitios extra: PeerTube.fr, Spotify.link, Google Podcasts, Castbox, Anchor, Transistor, Buzzsprout, Libsyn, Simplecast, Overcast, Pocket Casts, Scribd, SlideShare
+- Dependencias: `requests>=2.32.0`, `Pillow>=10.4.0`
+
+### Cambiado
+- Version 1.16.0
+- User-Agent HTTP actualizado (Chrome 147)
+- setup.py alineado a 1.16.0
+
 ## [1.15.0] - 2026-09-29
 
 ### Agregado
