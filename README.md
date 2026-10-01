@@ -5,15 +5,15 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.16.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.17.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera, Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer, Giphy, Tenor, PBS, NBC, Reuters, NHK, Yandex Music, Anghami, Radio Javan, Discord, Streamja, Anchor, Castbox, Pocket Casts, Scribd, SlideShare y otros sitios compatibles con yt-dlp
-- **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--yes-playlist`, `--playlist-items`, `--max-downloads`)
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera, Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer, Giphy, Tenor, PBS, NBC, Reuters, NHK, Yandex Music, Anghami, Radio Javan, Discord, Streamja, Anchor, Castbox, Pocket Casts, Scribd, SlideShare, PeerTube.fr, Google Podcasts, Transistor, Buzzsprout, Libsyn, Simplecast, Overcast, Medal.tv, Hotstar, Viki, iQiyi, WeTV, SonyLIV, ZEE5, Audius, Gaana, Hungama, MX Player, Boomplay, Resso, Piped, Rokfin, Brighteon y otros sitios compatibles con yt-dlp
+- **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--yes-playlist`, `--playlist-items`, `--max-downloads`, `--flat-playlist`)
 - **🎵 Audio**: Extrae audio en mp3, m4a, opus, wav o flac (requiere ffmpeg). Opcional: `--embed-thumbnail`
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo (usa el nombre de `Content-Disposition` si existe). Reanuda si el archivo ya existe a medias
 - **🎨 Interfaz moderna**: GUI estilo chat, intuitiva
@@ -26,11 +26,11 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 - **🌍 Geo-bypass**: `--geo-bypass` intenta saltar bloqueos de region
 - **🎬 Contenedor**: `--merge-format mp4|mkv|webm` y `--embed-subs`
 - **🚪 Windows names**: `--windows-filenames` y `--no-overwrites`
-- **📡 Red**: `--force-ipv4`, `--socket-timeout`, `--concurrent-fragments`
+- **📡 Red**: `--force-ipv4`, `--force-ipv6`, `--socket-timeout`, `--concurrent-fragments`, `--rate-limit`, `--sleep-requests`
 - **🎧 Keep video**: `--keep-video` conserva el original al extraer audio
-- **🔓 Playlists robustas**: `--ignore-errors` y `--write-description`
+- **🔓 Playlists robustas**: `--ignore-errors`, `--write-description`, `--match-filter`, `--min-filesize`, `--max-filesize`
 - **💬 Comentarios y lives**: `--write-comments`, `--break-on-existing`, `--live-from-start`
-- **🧳 Extra CLI**: `--add-metadata`, `--no-part`, `--prefer-free-formats`, `--quiet`, `--verbose`, `--force-ipv6`
+- **🧳 Extra CLI**: `--add-metadata`, `--embed-chapters`, `--no-part`, `--prefer-free-formats`, `--quiet`, `--verbose`, `--convert-subs`, `--sub-langs`, `--extractor-retries`
 - **🛡️ TLS y playlists**: `--no-check-certificates`, `--age-limit`, `--playlist-start`, `--playlist-end`, `--skip-unavailable-fragments`, `--no-warnings`
 - **🔓 Codigo abierto**: el motor GUI vive en `engine.py`
 
@@ -117,6 +117,11 @@ python main.py "URL" --no-check-certificates --no-warnings
 python main.py "URL" --age-limit 18
 python main.py "URL" --playlist-start 2 --playlist-end 10
 python main.py "URL" --skip-unavailable-fragments
+python main.py "URL" --rate-limit 2M --sleep-requests 1
+python main.py "URL" --match-filter "duration < 600"
+python main.py "URL" --embed-chapters --convert-subs srt --sub-langs es,en
+python main.py "URL" --flat-playlist --extractor-retries 5
+python main.py "URL" --min-filesize 1M --max-filesize 500M
 python main.py "URL" --list-formats
 python main.py --version
 ```
@@ -131,7 +136,7 @@ Contenedores: `mp4`, `mkv`, `webm`.
 ## 📦 Dependencias
 
 ```
-yt-dlp>=2026.8.19
+yt-dlp>=2026.9.27
 requests>=2.32.0
 customtkinter>=5.2.0
 Pillow>=10.4.0

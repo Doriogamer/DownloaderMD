@@ -2,6 +2,19 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.17.0] - 2026-10-01
+
+### Agregado
+- Sitios que faltaban en el motor de 1.16.0: PeerTube.fr, Spotify.link, Google Podcasts, Castbox, Anchor, Transistor, Buzzsprout, Libsyn, Simplecast, Overcast
+- Sitios extra: Medal.tv, Hotstar, Viki, iQiyi, WeTV, SonyLIV, ZEE5, Audius, Gaana, Hungama, MX Player, Boomplay, Resso, Piped, Rokfin, Brighteon
+- CLI: `--rate-limit`, `--match-filter`, `--embed-chapters`, `--convert-subs`, `--sub-langs`, `--flat-playlist`, `--min-filesize`, `--max-filesize`, `--sleep-requests`, `--extractor-retries`
+
+### Cambiado
+- Version del motor alineada a 1.17.0 (downloader.py seguia en 1.15.0)
+- User-Agent HTTP actualizado (Chrome 148)
+- Requisito `yt-dlp>=2026.9.27`
+- setup.py alineado a 1.17.0
+
 ## [1.16.0] - 2026-09-30
 
 ### Agregado
