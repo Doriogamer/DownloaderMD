@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.17.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.18.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,9 +24,9 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.17.0"
+APP_VERSION = "1.18.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
-HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
@@ -84,6 +84,11 @@ MEDIA_HOSTS = (
     "wetv.vip", "sonyliv.com", "zee5.com", "audius.co",
     "gaana.com", "hungama.com", "mxplayer.in", "boomplay.com",
     "resso.com", "piped.video", "rokfin.com", "brighteon.com",
+    "kuaishou.com", "v.qq.com", "hidive.com", "jamendo.com",
+    "twitcasting.tv", "fc2.com", "video.fc2.com",
+    "rtve.es", "dw.com", "france24.com", "svtplay.se",
+    "nrk.no", "cbc.ca", "raiplay.it", "music.163.com",
+    "bilibili.tv",
 )
 
 
@@ -209,7 +214,7 @@ def _http_download(url, outdir):
     return dest
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False, rate_limit=None, match_filter=None, embed_chapters=False, convert_subs=None, sub_langs=None, flat_playlist=False, min_filesize=None, max_filesize=None, sleep_requests=None, extractor_retries=None):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False, rate_limit=None, match_filter=None, embed_chapters=False, convert_subs=None, sub_langs=None, flat_playlist=False, min_filesize=None, max_filesize=None, sleep_requests=None, extractor_retries=None, dateafter=None, datebefore=None, match_title=None, reject_title=None, trim_filenames=None, lazy_playlist=False, impersonate=None):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -312,6 +317,23 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
                 ydl_opts["extractor_retries"] = int(extractor_retries)
             except (TypeError, ValueError):
                 pass
+        if dateafter:
+            ydl_opts["dateafter"] = str(dateafter)
+        if datebefore:
+            ydl_opts["datebefore"] = str(datebefore)
+        if match_title:
+            ydl_opts["matchtitle"] = match_title
+        if reject_title:
+            ydl_opts["rejecttitle"] = reject_title
+        if trim_filenames not in (None, ""):
+            try:
+                ydl_opts["trim_file_name"] = int(trim_filenames)
+            except (TypeError, ValueError):
+                pass
+        if lazy_playlist:
+            ydl_opts["lazy_playlist"] = True
+        if impersonate:
+            ydl_opts["impersonate"] = impersonate
         if sub_langs:
             langs = [x.strip() for x in str(sub_langs).split(",") if x.strip()]
             if langs:
@@ -450,6 +472,13 @@ def main():
     parser.add_argument("--max-filesize", dest="max_filesize", default=None, help="Tamano maximo, ej. 500M")
     parser.add_argument("--sleep-requests", dest="sleep_requests", default=None, help="Pausa entre peticiones HTTP (segundos)")
     parser.add_argument("--extractor-retries", dest="extractor_retries", default=None, help="Reintentos del extractor")
+    parser.add_argument("--dateafter", default=None, help="Solo videos posteriores a YYYYMMDD")
+    parser.add_argument("--datebefore", default=None, help="Solo videos anteriores a YYYYMMDD")
+    parser.add_argument("--match-title", dest="match_title", default=None, help="Regex de titulos a incluir")
+    parser.add_argument("--reject-title", dest="reject_title", default=None, help="Regex de titulos a excluir")
+    parser.add_argument("--trim-filenames", dest="trim_filenames", default=None, help="Recortar nombres a N caracteres")
+    parser.add_argument("--lazy-playlist", action="store_true", help="Procesar la playlist de forma perezosa")
+    parser.add_argument("--impersonate", default=None, help="Cliente a imitar, ej. chrome")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -469,7 +498,9 @@ def main():
             args.playlist_end, args.skip_unavailable_fragments, args.no_warnings,
             args.rate_limit, args.match_filter, args.embed_chapters, args.convert_subs,
             args.sub_langs, args.flat_playlist, args.min_filesize, args.max_filesize,
-            args.sleep_requests, args.extractor_retries,
+            args.sleep_requests, args.extractor_retries, args.dateafter, args.datebefore,
+            args.match_title, args.reject_title, args.trim_filenames, args.lazy_playlist,
+            args.impersonate,
         )
     elif extra:
         run_cli_mode(extra[0])

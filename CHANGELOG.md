@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.18.0] - 2026-10-02
+
+### Agregado
+- Sitios extra: Kuaishou, Tencent Video (v.qq.com), HIDIVE, Jamendo, TwitCasting, FC2, RTVE, DW, France 24, SVT Play, NRK, CBC, RaiPlay, NetEase Cloud Music
+- CLI: `--dateafter`, `--datebefore`, `--match-title`, `--reject-title`, `--trim-filenames`, `--lazy-playlist`, `--impersonate`
+
+### Cambiado
+- Version 1.18.0
+- User-Agent HTTP actualizado (Chrome 149)
+- setup.py y pagina de GitHub Pages alineados a 1.18.0
+
 ## [1.17.0] - 2026-10-01
 
 ### Agregado
