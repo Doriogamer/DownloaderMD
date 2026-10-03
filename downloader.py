@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.18.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.19.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,9 +24,9 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.18.0"
+APP_VERSION = "1.19.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
-HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
@@ -88,7 +88,13 @@ MEDIA_HOSTS = (
     "twitcasting.tv", "fc2.com", "video.fc2.com",
     "rtve.es", "dw.com", "france24.com", "svtplay.se",
     "nrk.no", "cbc.ca", "raiplay.it", "music.163.com",
-    "bilibili.tv",
+    "steamcommunity.com", "steampowered.com",
+    "ign.com", "gamespot.com",
+    "coursera.org", "udemy.com", "edx.org", "khanacademy.org",
+    "theverge.com", "polygon.com", "vox.com",
+    "bloomberg.com", "wsj.com", "ft.com",
+    "nytimes.com", "washingtonpost.com",
+    "twitch.tv",
 )
 
 
@@ -214,7 +220,7 @@ def _http_download(url, outdir):
     return dest
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False, rate_limit=None, match_filter=None, embed_chapters=False, convert_subs=None, sub_langs=None, flat_playlist=False, min_filesize=None, max_filesize=None, sleep_requests=None, extractor_retries=None, dateafter=None, datebefore=None, match_title=None, reject_title=None, trim_filenames=None, lazy_playlist=False, impersonate=None):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False, rate_limit=None, match_filter=None, embed_chapters=False, convert_subs=None, sub_langs=None, flat_playlist=False, min_filesize=None, max_filesize=None, sleep_requests=None, extractor_retries=None, dateafter=None, datebefore=None, match_title=None, reject_title=None, trim_filenames=None, lazy_playlist=False, impersonate=None, output_template=None, ffmpeg_location=None, by_uploader=False):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -236,8 +242,16 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             retries_n = int(retries)
         except (TypeError, ValueError):
             retries_n = 18
+        if output_template:
+            outtmpl = output_template
+            if not os.path.isabs(outtmpl):
+                outtmpl = os.path.join(outdir, outtmpl)
+        elif by_uploader:
+            outtmpl = os.path.join(outdir, "%(uploader|unknown)s", "%(title)s.%(ext)s")
+        else:
+            outtmpl = os.path.join(outdir, "%(title)s.%(ext)s")
         ydl_opts = {
-            "outtmpl": os.path.join(outdir, "%(title)s.%(ext)s"),
+            "outtmpl": outtmpl,
             "format": yfmt,
             "noplaylist": False if yes_playlist else no_playlist,
             "merge_output_format": merge,
@@ -334,6 +348,8 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             ydl_opts["lazy_playlist"] = True
         if impersonate:
             ydl_opts["impersonate"] = impersonate
+        if ffmpeg_location:
+            ydl_opts["ffmpeg_location"] = ffmpeg_location
         if sub_langs:
             langs = [x.strip() for x in str(sub_langs).split(",") if x.strip()]
             if langs:
@@ -364,6 +380,13 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             ydl_opts["max_sleep_interval"] = float(sleep_interval) + 2
         if sponsorblock:
             ydl_opts["sponsorblock_remove"] = ["sponsor", "selfpromo", "interaction"]
+        if fmt in ("mp3", "audio") and not list_formats:
+            import shutil
+            ffmpeg_ok = bool(ffmpeg_location) or shutil.which("ffmpeg")
+            if not ffmpeg_ok:
+                print("[-] ffmpeg no esta en el PATH. El audio no se puede extraer sin ffmpeg.")
+                print("    Instalalo o pasa --ffmpeg-location RUTA")
+                sys.exit(1)
         post = []
         if fmt in ("mp3", "audio") and not list_formats:
             codec = audio_format if audio_format in ("mp3", "m4a", "opus", "wav", "flac") else "mp3"
@@ -479,6 +502,9 @@ def main():
     parser.add_argument("--trim-filenames", dest="trim_filenames", default=None, help="Recortar nombres a N caracteres")
     parser.add_argument("--lazy-playlist", action="store_true", help="Procesar la playlist de forma perezosa")
     parser.add_argument("--impersonate", default=None, help="Cliente a imitar, ej. chrome")
+    parser.add_argument("--output-template", dest="output_template", default=None, help="Plantilla yt-dlp, ej. %(uploader)s/%(title)s.%(ext)s")
+    parser.add_argument("--ffmpeg-location", dest="ffmpeg_location", default=None, help="Carpeta o binario de ffmpeg")
+    parser.add_argument("--by-uploader", action="store_true", help="Guardar en una carpeta por autor/canal")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -500,7 +526,7 @@ def main():
             args.sub_langs, args.flat_playlist, args.min_filesize, args.max_filesize,
             args.sleep_requests, args.extractor_retries, args.dateafter, args.datebefore,
             args.match_title, args.reject_title, args.trim_filenames, args.lazy_playlist,
-            args.impersonate,
+            args.impersonate, args.output_template, args.ffmpeg_location, args.by_uploader,
         )
     elif extra:
         run_cli_mode(extra[0])

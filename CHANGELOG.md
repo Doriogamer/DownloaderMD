@@ -2,6 +2,19 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.19.0] - 2026-10-03
+
+### Agregado
+- Sitios extra: Steam, IGN, GameSpot, Coursera, Udemy, edX, Khan Academy, The Verge, Polygon, Vox, Bloomberg, WSJ, Financial Times, NYT y Washington Post
+- CLI: `--output-template`, `--by-uploader`, `--ffmpeg-location`
+- Aviso y salida si se pide audio y ffmpeg no esta en el PATH
+
+### Cambiado
+- Version 1.19.0
+- User-Agent HTTP actualizado (Chrome 150)
+- setup.py y pagina de GitHub Pages alineados a 1.19.0
+- Hosts duplicados de la lista de media limpiados
+
 ## [1.18.0] - 2026-10-02
 
 ### Agregado
