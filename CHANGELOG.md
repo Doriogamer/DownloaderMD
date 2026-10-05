@@ -2,6 +2,18 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.20.0] - 2026-10-05
+
+### Agregado
+- Sitios que faltaban del listado 1.16 y sitios extra: Pocket Casts, Scribd, SlideShare, ABC, CBS, Sky News, Euronews, The Guardian, Le Monde, Der Spiegel, NPO, Stream.cz, Wistia, Gofile, Pixeldrain, Catbox, 4shared, Telegram, PeerTube.social, IBM Video, Baidu Pan
+- CLI: `--referer`, `--user-agent`, `--extractor-args`, `--playlist-reverse`, `--download-sections`, `--newline`, `--write-link`
+
+### Cambiado
+- Version 1.20.0
+- User-Agent HTTP actualizado (Chrome 151)
+- setup.py y pagina de GitHub Pages alineados a 1.20.0
+- Hosts duplicados de Twitch quitados del final de la lista
+
 ## [1.19.0] - 2026-10-03
 
 ### Agregado

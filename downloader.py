@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.19.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.20.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,9 +24,9 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.19.0"
+APP_VERSION = "1.20.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
-HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
@@ -94,7 +94,14 @@ MEDIA_HOSTS = (
     "theverge.com", "polygon.com", "vox.com",
     "bloomberg.com", "wsj.com", "ft.com",
     "nytimes.com", "washingtonpost.com",
-    "twitch.tv",
+    "pocketcasts.com", "scribd.com", "slideshare.net",
+    "abc.com", "abcnews.go.com", "cbs.com", "cbsnews.com",
+    "sky.com", "news.sky.com", "euronews.com", "theguardian.com",
+    "lemonde.fr", "spiegel.de", "npo.nl", "npostart.nl",
+    "stream.cz", "wistia.com", "wistia.net",
+    "gofile.io", "pixeldrain.com", "catbox.moe", "4shared.com",
+    "t.me", "telegram.me", "peertube.social", "video.ibm.com",
+    "pan.baidu.com", "baidu.com",
 )
 
 
@@ -220,7 +227,7 @@ def _http_download(url, outdir):
     return dest
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False, rate_limit=None, match_filter=None, embed_chapters=False, convert_subs=None, sub_langs=None, flat_playlist=False, min_filesize=None, max_filesize=None, sleep_requests=None, extractor_retries=None, dateafter=None, datebefore=None, match_title=None, reject_title=None, trim_filenames=None, lazy_playlist=False, impersonate=None, output_template=None, ffmpeg_location=None, by_uploader=False):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False, rate_limit=None, match_filter=None, embed_chapters=False, convert_subs=None, sub_langs=None, flat_playlist=False, min_filesize=None, max_filesize=None, sleep_requests=None, extractor_retries=None, dateafter=None, datebefore=None, match_title=None, reject_title=None, trim_filenames=None, lazy_playlist=False, impersonate=None, output_template=None, ffmpeg_location=None, by_uploader=False, referer=None, user_agent=None, extractor_args=None, playlist_reverse=False, download_sections=None, newline=False, write_link=False):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -350,6 +357,36 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             ydl_opts["impersonate"] = impersonate
         if ffmpeg_location:
             ydl_opts["ffmpeg_location"] = ffmpeg_location
+        if referer:
+            ydl_opts["referer"] = referer
+        if user_agent:
+            ydl_opts.setdefault("http_headers", {})["User-Agent"] = user_agent
+        if extractor_args:
+            parsed = {}
+            # formato yt-dlp: extractor:clave=valor;clave2=a,b
+            for chunk in str(extractor_args).split(" "):
+                if ":" not in chunk:
+                    continue
+                ext, rest = chunk.split(":", 1)
+                opts = parsed.setdefault(ext, {})
+                for pair in rest.split(";"):
+                    if "=" not in pair:
+                        continue
+                    key, val = pair.split("=", 1)
+                    opts[key] = [x for x in val.split(",") if x]
+            if parsed:
+                ydl_opts["extractor_args"] = parsed
+        if playlist_reverse:
+            ydl_opts["playlistreverse"] = True
+        if download_sections:
+            try:
+                ydl_opts["download_ranges"] = yt_dlp.utils.download_range_func(None, [download_sections])
+            except Exception:
+                print("[-] --download-sections no se pudo aplicar:", download_sections)
+        if newline:
+            ydl_opts["progress_with_newline"] = True
+        if write_link:
+            ydl_opts["writelink"] = True
         if sub_langs:
             langs = [x.strip() for x in str(sub_langs).split(",") if x.strip()]
             if langs:
@@ -505,6 +542,13 @@ def main():
     parser.add_argument("--output-template", dest="output_template", default=None, help="Plantilla yt-dlp, ej. %(uploader)s/%(title)s.%(ext)s")
     parser.add_argument("--ffmpeg-location", dest="ffmpeg_location", default=None, help="Carpeta o binario de ffmpeg")
     parser.add_argument("--by-uploader", action="store_true", help="Guardar en una carpeta por autor/canal")
+    parser.add_argument("--referer", default=None, help="Cabecera Referer para el sitio")
+    parser.add_argument("--user-agent", dest="user_agent", default=None, help="User-Agent HTTP propio")
+    parser.add_argument("--extractor-args", dest="extractor_args", default=None, help="Argumentos del extractor, ej. youtube:player_client=android")
+    parser.add_argument("--playlist-reverse", action="store_true", help="Descargar la playlist al reves")
+    parser.add_argument("--download-sections", dest="download_sections", default=None, help="Tramos, ej. *0:30-1:00")
+    parser.add_argument("--newline", action="store_true", help="Progreso en lineas nuevas")
+    parser.add_argument("--write-link", action="store_true", help="Guardar un .url con el enlace")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -526,7 +570,7 @@ def main():
             args.sub_langs, args.flat_playlist, args.min_filesize, args.max_filesize,
             args.sleep_requests, args.extractor_retries, args.dateafter, args.datebefore,
             args.match_title, args.reject_title, args.trim_filenames, args.lazy_playlist,
-            args.impersonate, args.output_template, args.ffmpeg_location, args.by_uploader,
+            args.impersonate, args.output_template, args.ffmpeg_location, args.by_uploader, args.referer, args.user_agent, args.extractor_args, args.playlist_reverse, args.download_sections, args.newline, args.write_link,
         )
     elif extra:
         run_cli_mode(extra[0])
