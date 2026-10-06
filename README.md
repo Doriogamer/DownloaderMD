@@ -5,14 +5,14 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.20.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.21.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
 ## ✨ Caracteristicas
 
-- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera, Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer, Giphy, Tenor, PBS, NBC, Reuters, NHK, Yandex Music, Anghami, Radio Javan, Discord, Streamja, Anchor, Castbox, Pocket Casts, Scribd, SlideShare, PeerTube.fr, Google Podcasts, Transistor, Buzzsprout, Libsyn, Simplecast, Overcast, Medal.tv, Hotstar, Viki, iQiyi, WeTV, SonyLIV, ZEE5, Audius, Gaana, Hungama, MX Player, Boomplay, Resso, Piped, Rokfin, Brighteon, Kuaishou, Tencent Video, HIDIVE, Jamendo, TwitCasting, FC2, RTVE, DW, France 24, SVT, NRK, CBC, RaiPlay, NetEase Cloud Music, Steam, IGN, GameSpot, Coursera, Udemy, edX, Khan Academy, The Verge, Polygon, Vox, Bloomberg, WSJ, FT, NYT, Washington Post, Pocket Casts, Scribd, SlideShare, ABC, CBS, Sky News, Euronews, The Guardian, Le Monde, Der Spiegel, NPO, Stream.cz, Wistia, Gofile, Pixeldrain, Telegram, Baidu Pan y otros sitios compatibles con yt-dlp
+- **📺 YouTube y mas**: YouTube, TikTok, Instagram, Threads, X/Twitter, Facebook, Vimeo, Twitch, SoundCloud, Reddit, Dailymotion, Bilibili, Pinterest, Bandcamp, Mixcloud, Kick, Rumble, Bluesky, Flickr, TED, Streamable, Imgur, LinkedIn, VK, Odysee, Newgrounds, Archive.org, NicoNico, Tumblr, BitChute, PeerTube, Mastodon, Gab, LBRY, Weibo, Youku, Loom, Snapchat, Douyin, Ixigua, Rutube, OK.ru, Dzen, Coub, Patreon, Substack, Apple Podcasts, Nebula, Floatplane, Aparat, Audiomack, HearThis, Podbean, CapCut, Likee, Weverse, CHZZK, SOOP, Trovo, AfreecaTV, Naver TV, media.ccc.de, CuriosityStream, Dropout, ESPN, BBC, CNN, NPR, Spotify, Deezer, Tidal, Apple Music, BandLab, Pixiv, Crunchyroll, Xiaohongshu, AbemaTV, ARTE, JioSaavn, Vocaroo, OPENREC, SHOWROOM, 17LIVE, AcFun, Google Drive, Dropbox, Al Jazeera, Mega, MediaFire, OneDrive, Box, DeviantArt, ArtStation, Last.fm, iVoox, YouTube Kids, Amazon Music, Misskey, Kwai, StreamYard, Soundgasm, WeTransfer, Giphy, Tenor, PBS, NBC, Reuters, NHK, Yandex Music, Anghami, Radio Javan, Discord, Streamja, Anchor, Castbox, Pocket Casts, Scribd, SlideShare, PeerTube.fr, Google Podcasts, Transistor, Buzzsprout, Libsyn, Simplecast, Overcast, Medal.tv, Hotstar, Viki, iQiyi, WeTV, SonyLIV, ZEE5, Audius, Gaana, Hungama, MX Player, Boomplay, Resso, Piped, Rokfin, Brighteon, Kuaishou, Tencent Video, HIDIVE, Jamendo, TwitCasting, FC2, RTVE, DW, France 24, SVT, NRK, CBC, RaiPlay, NetEase Cloud Music, Steam, IGN, GameSpot, Coursera, Udemy, edX, Khan Academy, The Verge, Polygon, Vox, Bloomberg, WSJ, FT, NYT, Washington Post, Pocket Casts, Scribd, SlideShare, ABC, CBS, Sky News, Euronews, The Guardian, Le Monde, Der Spiegel, NPO, Stream.cz, Wistia, Gofile, Pixeldrain, Telegram, Baidu Pan, Wikimedia Commons, IMDb, Fox News, MSNBC, AP News, The Economist, El Pais, El Mundo, Globo, ZDF, ARD Mediathek, France TV, ITV, Channel 4, DR, Yle, Atresplayer, TVer, DLive, Audioboom, Spreaker, Acast, Megaphone, Omny, Pandora, Qobuz, Freesound, Google Photos, Yandex Disk, Mail.ru Cloud, Xbox, RedGIFs y otros sitios compatibles con yt-dlp
 - **📃 Playlists**: Descarga listas de reproduccion (`--no-playlist`, `--yes-playlist`, `--playlist-items`, `--max-downloads`, `--flat-playlist`)
 - **🎵 Audio**: Extrae audio en mp3, m4a, opus, wav o flac (requiere ffmpeg). Opcional: `--embed-thumbnail`
 - **🌐 Enlaces directos**: Descarga cualquier archivo desde un link directo (usa el nombre de `Content-Disposition` si existe). Reanuda si el archivo ya existe a medias
@@ -35,6 +35,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 - **📁 Salida**: `--output-template`, `--by-uploader` y `--ffmpeg-location`
 - **🧭 Red y recortes**: `--referer`, `--user-agent`, `--extractor-args`, `--playlist-reverse`, `--download-sections`, `--newline`, `--write-link`
 - **🛡️ TLS y playlists**: `--no-check-certificates`, `--age-limit`, `--playlist-start`, `--playlist-end`, `--skip-unavailable-fragments`, `--no-warnings`
+- **🎲 Cola y metadata**: `--mark-watched`, `--wait-for-video`, `--playlist-random`, `--write-all-thumbnails`, `--keep-fragments`, `--max-sleep-interval`, `--embed-info-json`, `--simulate`
 - **🔓 Codigo abierto**: el motor GUI vive en `engine.py`
 
 ---
@@ -136,6 +137,12 @@ python main.py "URL" --referer "https://example.com" --user-agent "Mozilla/5.0"
 python main.py "URL" --extractor-args "youtube:player_client=android"
 python main.py "URL" --playlist-reverse --newline
 python main.py "URL" --download-sections "*0:30-1:00" --write-link
+python main.py "URL" --mark-watched --cookies-from-browser chrome
+python main.py "URL" --wait-for-video 30
+python main.py "URL" --playlist-random --max-sleep-interval 5
+python main.py "URL" --write-all-thumbnails --embed-info-json
+python main.py "URL" --keep-fragments
+python main.py "URL" --simulate
 python main.py "URL" --list-formats
 python main.py --version
 ```

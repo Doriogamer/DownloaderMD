@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.21.0] - 2026-10-06
+
+### Agregado
+- Sitios extra: Wikimedia Commons, IMDb, Fox News, MSNBC, AP News, The Economist, El Pais, El Mundo, Globo, ZDF, ARD Mediathek, France TV, ITV, Channel 4, DR, Yle, Atresplayer, TVer, DLive, Audioboom, Spreaker, Acast, Megaphone, Omny, Pandora, Qobuz, Freesound, Google Photos, Yandex Disk, Mail.ru Cloud, Xbox y RedGIFs
+- CLI: `--mark-watched`, `--wait-for-video`, `--playlist-random`, `--write-all-thumbnails`, `--keep-fragments`, `--max-sleep-interval`, `--embed-info-json`, `--simulate`
+
+### Cambiado
+- Version 1.21.0
+- User-Agent HTTP actualizado (Chrome 152)
+- setup.py y pagina de GitHub Pages alineados a 1.21.0
+
 ## [1.20.0] - 2026-10-05
 
 ### Agregado
