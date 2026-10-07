@@ -2,6 +2,17 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.22.0] - 2026-10-07
+
+### Agregado
+- Sitios extra: BBC.com, ABC Australia, SBS, 9Now, 10 play, Pluto TV, Tubi, Crackle, Vidyard, SproutVideo, Gettr, Minds, Banned.video, Veoh, SnackVideo, Triller, Lemon8, ShareChat, Moj, Player FM, Podcast Addict, TuneIn, iHeart, Streamtape, Doodstream y Mixdrop
+- CLI: `--write-auto-subs`, `--xattrs`, `--retry-sleep`, `--fragment-retries`, `--http-chunk-size`, `--format-sort`, `--break-on-reject`, `--parse-metadata`
+
+### Cambiado
+- Version 1.22.0
+- User-Agent HTTP actualizado (Chrome 153)
+- setup.py y pagina de GitHub Pages alineados a 1.22.0
+
 ## [1.21.0] - 2026-10-06
 
 ### Agregado

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.21.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.22.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,9 +24,9 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.21.0"
+APP_VERSION = "1.22.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
-HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36"
+HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
 
 MEDIA_HOSTS = (
     "youtube.com", "youtu.be", "youtube-nocookie.com", "music.youtube.com",
@@ -111,6 +111,12 @@ MEDIA_HOSTS = (
     "pandora.com", "qobuz.com", "freesound.org", "photos.google.com",
     "disk.yandex.ru", "yadi.sk", "cloud.mail.ru", "xbox.com",
     "redgifs.com", "joinpeertube.org",
+    "bbc.com", "bbc.in", "abc.net.au", "sbs.com.au", "9now.com.au", "10play.com.au",
+    "pluto.tv", "tubi.tv", "crackle.com", "vidyard.com", "sproutvideo.com",
+    "gettr.com", "minds.com", "banned.video", "veoh.com",
+    "snackvideo.com", "triller.co", "lemon8-app.com", "sharechat.com", "mojapp.in",
+    "player.fm", "podcastaddict.com", "tunein.com", "iheart.com",
+    "streamtape.com", "doodstream.com", "mixdrop.co", "streamwish.to",
 )
 
 
@@ -236,7 +242,7 @@ def _http_download(url, outdir):
     return dest
 
 
-def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False, rate_limit=None, match_filter=None, embed_chapters=False, convert_subs=None, sub_langs=None, flat_playlist=False, min_filesize=None, max_filesize=None, sleep_requests=None, extractor_retries=None, dateafter=None, datebefore=None, match_title=None, reject_title=None, trim_filenames=None, lazy_playlist=False, impersonate=None, output_template=None, ffmpeg_location=None, by_uploader=False, referer=None, user_agent=None, extractor_args=None, playlist_reverse=False, download_sections=None, newline=False, write_link=False, mark_watched=False, wait_for_video=None, playlist_random=False, write_all_thumbnails=False, keep_fragments=False, max_sleep_interval=None, embed_info_json=False, simulate=False):
+def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist=False, cookies_from_browser=None, audio_quality="192", write_subs=False, write_thumbnail=False, list_formats=False, proxy=None, restrict_filenames=False, embed_thumbnail=False, sponsorblock=False, download_archive=None, write_info_json=False, audio_format="mp3", cookies=None, max_downloads=None, playlist_items=None, sleep_interval=None, embed_subs=False, merge_format="mp4", retries=18, no_mtime=False, geo_bypass=False, windows_filenames=False, no_overwrites=False, keep_video=False, force_ipv4=False, socket_timeout=None, concurrent_fragments=12, ignore_errors=False, write_description=False, write_comments=False, break_on_existing=False, live_from_start=False, yes_playlist=False, add_metadata=False, no_part=False, prefer_free_formats=False, quiet=False, verbose=False, force_ipv6=False, no_check_certificates=False, age_limit=None, playlist_start=None, playlist_end=None, skip_unavailable_fragments=False, no_warnings=False, rate_limit=None, match_filter=None, embed_chapters=False, convert_subs=None, sub_langs=None, flat_playlist=False, min_filesize=None, max_filesize=None, sleep_requests=None, extractor_retries=None, dateafter=None, datebefore=None, match_title=None, reject_title=None, trim_filenames=None, lazy_playlist=False, impersonate=None, output_template=None, ffmpeg_location=None, by_uploader=False, referer=None, user_agent=None, extractor_args=None, playlist_reverse=False, download_sections=None, newline=False, write_link=False, mark_watched=False, wait_for_video=None, playlist_random=False, write_all_thumbnails=False, keep_fragments=False, max_sleep_interval=None, embed_info_json=False, simulate=False, write_auto_subs=False, xattrs=False, retry_sleep=None, fragment_retries=None, http_chunk_size=None, format_sort=None, break_on_reject=False, parse_metadata=None):
     print("DownloaderMD CLI v%s" % APP_VERSION)
     url = validate_url(url_input)
     if not url:
@@ -418,6 +424,25 @@ def run_cli_mode(url_input, fmt="video", quality="720", output=None, no_playlist
             ydl_opts["embed_infojson"] = True
         if simulate:
             ydl_opts["skip_download"] = True
+        if write_auto_subs:
+            ydl_opts["writeautomaticsub"] = True
+        if xattrs:
+            ydl_opts["xattrs"] = True
+        if break_on_reject:
+            ydl_opts["break_on_reject"] = True
+        if retry_sleep:
+            ydl_opts["retry_sleep_functions"] = {"http": float(retry_sleep), "fragment": float(retry_sleep), "extractor": float(retry_sleep)}
+        if fragment_retries not in (None, ""):
+            try:
+                ydl_opts["fragment_retries"] = int(fragment_retries)
+            except (TypeError, ValueError):
+                pass
+        if http_chunk_size:
+            ydl_opts["http_chunk_size"] = http_chunk_size
+        if format_sort:
+            ydl_opts["format_sort"] = [x.strip() for x in str(format_sort).split(",") if x.strip()]
+        if parse_metadata:
+            ydl_opts["parse_metadata"] = str(parse_metadata)
         if sub_langs:
             langs = [x.strip() for x in str(sub_langs).split(",") if x.strip()]
             if langs:
@@ -588,6 +613,14 @@ def main():
     parser.add_argument("--max-sleep-interval", dest="max_sleep_interval", default=None, help="Tope aleatorio de pausa entre items")
     parser.add_argument("--embed-info-json", action="store_true", help="Embeber metadata .info.json en el archivo")
     parser.add_argument("--simulate", action="store_true", help="Resolver el enlace sin descargar el archivo")
+    parser.add_argument("--write-auto-subs", action="store_true", help="Guardar subtitulos automaticos")
+    parser.add_argument("--xattrs", action="store_true", help="Escribir metadata en atributos extendidos del archivo")
+    parser.add_argument("--retry-sleep", type=float, default=None, help="Segundos de espera entre reintentos")
+    parser.add_argument("--fragment-retries", type=int, default=None, help="Reintentos por fragmento")
+    parser.add_argument("--http-chunk-size", default=None, help="Tamano de chunk HTTP, p.ej. 10M")
+    parser.add_argument("--format-sort", default=None, help="Orden de formatos, p.ej. res,fps,codec")
+    parser.add_argument("--break-on-reject", action="store_true", help="Parar la playlist al primer video rechazado")
+    parser.add_argument("--parse-metadata", default=None, help="Regla de metadata yt-dlp, p.ej. %(title)s:%(meta_title)s")
     parser.add_argument("--version", action="version", version="DownloaderMD %s" % APP_VERSION)
     args, extra = parser.parse_known_args()
     if args.url:
@@ -609,7 +642,7 @@ def main():
             args.sub_langs, args.flat_playlist, args.min_filesize, args.max_filesize,
             args.sleep_requests, args.extractor_retries, args.dateafter, args.datebefore,
             args.match_title, args.reject_title, args.trim_filenames, args.lazy_playlist,
-            args.impersonate, args.output_template, args.ffmpeg_location, args.by_uploader, args.referer, args.user_agent, args.extractor_args, args.playlist_reverse, args.download_sections, args.newline, args.write_link, args.mark_watched, args.wait_for_video, args.playlist_random, args.write_all_thumbnails, args.keep_fragments, args.max_sleep_interval, args.embed_info_json, args.simulate,
+            args.impersonate, args.output_template, args.ffmpeg_location, args.by_uploader, args.referer, args.user_agent, args.extractor_args, args.playlist_reverse, args.download_sections, args.newline, args.write_link, args.mark_watched, args.wait_for_video, args.playlist_random, args.write_all_thumbnails, args.keep_fragments, args.max_sleep_interval, args.embed_info_json, args.simulate, args.write_auto_subs, args.xattrs, args.retry_sleep, args.fragment_retries, args.http_chunk_size, args.format_sort, args.break_on_reject, args.parse_metadata,
         )
     elif extra:
         run_cli_mode(extra[0])
