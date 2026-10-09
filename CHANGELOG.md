@@ -2,6 +2,18 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.23.0] - 2026-10-09
+
+### Agregado
+- Sitios extra: Kakao TV, Viu, JioCinema, RTE, ORF, SRF, RTS, RSI, TVP, CCTV, Sina, Sohu, Metacafe, Vevo, VidLii y Clippit
+- CLI: `--batch-file`, `--show-history`, `--clear-history`, `--abort-on-error`, `--file-access-retries`, `--sleep-subtitles`, `--throttled-rate`, `--buffer-size`, `--no-cache-dir`, `--compat-options`, `--no-write-playlist-metafiles`
+
+### Cambiado
+- Version 1.23.0
+- User-Agent HTTP actualizado (Chrome 154)
+- Requisito `yt-dlp>=2026.09.28`
+- setup.py y pagina de GitHub Pages alineados a 1.23.0
+
 ## [1.22.0] - 2026-10-07
 
 ### Agregado
