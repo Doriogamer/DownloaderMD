@@ -2,6 +2,14 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.26.0] - 2026-10-12
+
+### Cambiado
+- Version 1.26.0
+- User-Agent HTTP actualizado (Chrome 157)
+- Requisito yt-dlp actualizado a >=2026.10.11
+- Documentación y página de GitHub Pages alineados a 1.26.0
+
 ## [1.25.0] - 2026-10-11
 
 ### Cambiado
