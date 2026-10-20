@@ -5,7 +5,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.31.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.32.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
@@ -105,7 +105,7 @@ Contenedores: `mp4`, `mkv`, `webm`.
 ## 📦 Dependencias
 
 ```
-yt-dlp>=2026.10.19
+yt-dlp>=2026.10.20
 requests>=2.32.0
 customtkinter>=5.2.0
 Pillow>=10.4.0
