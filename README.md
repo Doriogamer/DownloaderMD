@@ -5,7 +5,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.36.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.37.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
@@ -53,7 +53,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 ### Opcion 2: Instalacion manual (Para desarrolladores)
 
 **Requisitos previos:**
-- Python 3.8 o superior
+- Python 3.8 o superior (nota: yt-dlp reciente recomienda/requiere 3.11+)
 - pip
 - ffmpeg en el PATH (para audio y para unir video+audio)
 
@@ -71,7 +71,7 @@ python main.py
 | Requisito | Minimo | Recomendado |
 |-----------|--------|------------|
 | **OS** | Windows 10 / Linux / macOS | Windows 10/11 |
-| **Python** | 3.8 | 3.10+ |
+| **Python** | 3.8 | 3.11+ |
 | **RAM** | 512 MB | 2 GB |
 | **Espacio** | 100 MB | 500 MB |
 | **Internet** | Requerida | Requerida |
@@ -105,7 +105,7 @@ Contenedores: `mp4`, `mkv`, `webm`.
 ## 📦 Dependencias
 
 ```
-yt-dlp>=2026.10.25
+yt-dlp>=2026.10.26
 requests>=2.32.0
 customtkinter>=5.2.0
 Pillow>=10.4.0
@@ -124,7 +124,7 @@ Pillow>=10.4.0
 
 ### El programa no abre
 - `pip install --upgrade -r requirements.txt`
-- Python 3.8+
+- Python 3.8+ (preferible 3.11+)
 - Abre un [Issue](https://github.com/Doriogamer/DownloaderMD/issues)
 
 ---

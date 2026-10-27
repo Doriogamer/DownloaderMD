@@ -2,6 +2,15 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.37.0] - 2026-10-27
+
+### Cambiado
+- Version 1.37.0
+- User-Agent HTTP actualizado (Chrome 168)
+- Requisito yt-dlp actualizado a >=2026.10.26
+- Documentación y página de GitHub Pages alineados a 1.37.0
+- Nota: yt-dlp 2026.10.26 requiere Python 3.11+ (anteriormente 3.10)
+
 ## [1.36.0] - 2026-10-26
 
 ### Cambiado
