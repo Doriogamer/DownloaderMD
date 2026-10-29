@@ -2,6 +2,14 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.39.0] - 2026-10-29
+
+### Cambiado
+- Version 1.39.0
+- User-Agent HTTP actualizado (Chrome 170)
+- Requisito yt-dlp mantenido en >=2026.10.26 (última estable disponible)
+- Documentación y página de GitHub Pages alineados a 1.39.0
+
 ## [1.38.0] - 2026-10-28
 
 ### Cambiado
