@@ -5,7 +5,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.39.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.40.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
