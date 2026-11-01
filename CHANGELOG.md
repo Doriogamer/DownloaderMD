@@ -2,29 +2,37 @@
 
 Todos los cambios notables en este proyecto seran documentados en este archivo.
 
+## [1.41.0] - 2026-11-01
+
+### Cambiado
+- Version 1.41.0
+- User-Agent HTTP actualizado (Chrome 172)
+- Requisito yt-dlp mantenido en >=2026.10.26 (ultima estable disponible)
+- Documentacion y pagina de GitHub Pages alineados a 1.41.0
+
 ## [1.40.0] - 2026-10-30
 
 ### Cambiado
 - Version 1.40.0
 - User-Agent HTTP actualizado (Chrome 171)
-- Requisito yt-dlp mantenido en >=2026.10.26 (última estable disponible)
-- Documentación y página de GitHub Pages alineados a 1.40.0
+- Requisito yt-dlp mantenido en >=2026.10.26 (ultima estable disponible)
+- Documentacion y pagina de GitHub Pages alineados a 1.40.0
 
 ## [1.39.0] - 2026-10-29
 
 ### Cambiado
 - Version 1.39.0
 - User-Agent HTTP actualizado (Chrome 170)
-- Requisito yt-dlp mantenido en >=2026.10.26 (última estable disponible)
-- Documentación y página de GitHub Pages alineados a 1.39.0
+- Requisito yt-dlp mantenido en >=2026.10.26 (ultima estable disponible)
+- Documentacion y pagina de GitHub Pages alineados a 1.39.0
 
 ## [1.38.0] - 2026-10-28
 
 ### Cambiado
 - Version 1.38.0
 - User-Agent HTTP actualizado (Chrome 169)
-- Requisito yt-dlp mantenido en >=2026.10.26 (última estable disponible)
-- Documentación y página de GitHub Pages alineados a 1.38.0
+- Requisito yt-dlp mantenido en >=2026.10.26 (ultima estable disponible)
+- Documentacion y pagina de GitHub Pages alineados a 1.38.0
 
 ## [1.37.0] - 2026-10-27
 
@@ -32,7 +40,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.37.0
 - User-Agent HTTP actualizado (Chrome 168)
 - Requisito yt-dlp actualizado a >=2026.10.26
-- Documentación y página de GitHub Pages alineados a 1.37.0
+- Documentacion y pagina de GitHub Pages alineados a 1.37.0
 - Nota: yt-dlp 2026.10.26 requiere Python 3.11+ (anteriormente 3.10)
 
 ## [1.36.0] - 2026-10-26
@@ -41,7 +49,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.36.0
 - User-Agent HTTP actualizado (Chrome 167)
 - Requisito yt-dlp actualizado a >=2026.10.25
-- Documentación y página de GitHub Pages alineados a 1.36.0
+- Documentacion y pagina de GitHub Pages alineados a 1.36.0
 
 ## [1.35.0] - 2026-10-23
 
@@ -49,7 +57,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.35.0
 - User-Agent HTTP actualizado (Chrome 166)
 - Requisito yt-dlp actualizado a >=2026.10.22
-- Documentación y página de GitHub Pages alineados a 1.35.0
+- Documentacion y pagina de GitHub Pages alineados a 1.35.0
 
 ## [1.34.0] - 2026-10-22
 
@@ -57,7 +65,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.34.0
 - User-Agent HTTP actualizado (Chrome 165)
 - Requisito yt-dlp actualizado a >=2026.10.21
-- Documentación y página de GitHub Pages alineados a 1.34.0
+- Documentacion y pagina de GitHub Pages alineados a 1.34.0
 
 ## [1.33.0] - 2026-10-21
 
@@ -65,7 +73,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.33.0
 - User-Agent HTTP actualizado (Chrome 164)
 - Requisito yt-dlp actualizado a >=2026.10.21
-- Documentación y página de GitHub Pages alineados a 1.33.0
+- Documentacion y pagina de GitHub Pages alineados a 1.33.0
 
 ## [1.32.0] - 2026-10-20
 
@@ -73,7 +81,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.32.0
 - User-Agent HTTP actualizado (Chrome 163)
 - Requisito yt-dlp actualizado a >=2026.10.20
-- Documentación y página de GitHub Pages alineados a 1.32.0
+- Documentacion y pagina de GitHub Pages alineados a 1.32.0
 
 ## [1.31.0] - 2026-10-19
 
@@ -81,7 +89,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.31.0
 - User-Agent HTTP actualizado (Chrome 162)
 - Requisito yt-dlp actualizado a >=2026.10.19
-- Documentación y página de GitHub Pages alineados a 1.31.0
+- Documentacion y pagina de GitHub Pages alineados a 1.31.0
 
 ## [1.30.0] - 2026-10-18
 
@@ -89,7 +97,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.30.0
 - User-Agent HTTP actualizado (Chrome 161)
 - Requisito yt-dlp actualizado a >=2026.10.18
-- Documentación y página de GitHub Pages alineados a 1.30.0
+- Documentacion y pagina de GitHub Pages alineados a 1.30.0
 
 ## [1.29.0] - 2026-10-17
 
@@ -97,7 +105,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.29.0
 - User-Agent HTTP actualizado (Chrome 160)
 - Requisito yt-dlp actualizado a >=2026.10.17
-- Documentación y página de GitHub Pages alineados a 1.29.0
+- Documentacion y pagina de GitHub Pages alineados a 1.29.0
 
 ## [1.28.0] - 2026-10-16
 
@@ -105,7 +113,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.28.0
 - User-Agent HTTP actualizado (Chrome 159)
 - Requisito yt-dlp actualizado a >=2026.10.16
-- Documentación y página de GitHub Pages alineados a 1.28.0
+- Documentacion y pagina de GitHub Pages alineados a 1.28.0
 
 ## [1.27.0] - 2026-10-14
 
@@ -113,7 +121,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.27.0
 - User-Agent HTTP actualizado (Chrome 158)
 - Requisito yt-dlp actualizado a >=2026.10.14
-- Documentación y página de GitHub Pages alineados a 1.27.0
+- Documentacion y pagina de GitHub Pages alineados a 1.27.0
 
 ## [1.26.0] - 2026-10-12
 
@@ -121,7 +129,7 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - Version 1.26.0
 - User-Agent HTTP actualizado (Chrome 157)
 - Requisito yt-dlp actualizado a >=2026.10.11
-- Documentación y página de GitHub Pages alineados a 1.26.0
+- Documentacion y pagina de GitHub Pages alineados a 1.26.0
 
 ## [1.25.0] - 2026-10-11
 
@@ -130,15 +138,15 @@ Todos los cambios notables en este proyecto seran documentados en este archivo.
 - User-Agent HTTP actualizado (Chrome 156)
 - Requisito yt-dlp actualizado a >=2026.10.01
 - Motor (engine) actualizado con version y UA nuevos
-- Documentación y página de GitHub Pages alineados a 1.25.0
+- Documentacion y pagina de GitHub Pages alineados a 1.25.0
 
 ## [1.24.0] - 2026-10-10
 
 ### Cambiado
 - Version 1.24.0
 - User-Agent HTTP actualizado (Chrome 155)
-- Requisito yt-dlp mantenido en >=2026.09.28 (última disponible al momento)
-- Documentación y página de GitHub Pages alineados a 1.24.0
+- Requisito yt-dlp mantenido en >=2026.09.28 (ultima disponible al momento)
+- Documentacion y pagina de GitHub Pages alineados a 1.24.0
 
 ## [1.23.0] - 2026-10-09
 
