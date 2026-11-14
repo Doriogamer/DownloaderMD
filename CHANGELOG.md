@@ -1,3 +1,11 @@
+## [1.52.0] - 2026-11-14
+
+### Cambiado
+- Version 1.52.0
+- User-Agent HTTP actualizado (Chrome 165)
+- Requisito yt-dlp mantenido en >=2026.10.26 (ultima estable disponible)
+- Documentacion y pagina de GitHub Pages alineados a 1.52.0
+
 ## [1.51.0] - 2026-11-13
 
 ### Cambiado
