@@ -1,3 +1,12 @@
+## [1.56.0] - 2026-11-18
+
+### Cambiado
+- Version 1.56.0
+- User-Agent HTTP mantenido en Chrome 158 (version estable actual)
+- Dependencias: customtkinter >=6.0.0 y Pillow >=13.0.0 (incluye parches de seguridad)
+- Requisito yt-dlp mantenido en >=2026.10.26 (ultima estable)
+- Documentacion y pagina de GitHub Pages alineados a 1.56.0
+
 ## [1.55.0] - 2026-11-17
 
 ### Cambiado
