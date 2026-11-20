@@ -1,3 +1,13 @@
+## [1.58.0] - 2026-11-20
+
+### Cambiado
+- Version 1.58.0
+- Requisito mínimo de Python actualizado a 3.11+ (requerido por yt-dlp 2026.10.26+)
+- Documentación actualizada con nota sobre runtime JS (Deno recomendado) para soporte completo de YouTube
+- User-Agent HTTP mantenido en Chrome 159
+- Requisito yt-dlp mantenido en >=2026.10.26 (última estable)
+- Documentación y página de GitHub Pages alineados a 1.58.0
+
 ## [1.57.0] - 2026-11-19
 
 ### Cambiado
