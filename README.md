@@ -3,9 +3,9 @@
 **Descargador universal para YouTube, MP3 y links directos**  
 Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicaciones.
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![Python](https://img.shields.io/badge/Python-3.11+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.57.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.58.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
@@ -53,9 +53,10 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 ### Opcion 2: Instalacion manual (Para desarrolladores)
 
 **Requisitos previos:**
-- Python 3.8 o superior (nota: yt-dlp reciente recomienda/requiere 3.11+)
+- Python 3.11 o superior (requerido por yt-dlp 2026.10.26+)
 - pip
 - ffmpeg en el PATH (para audio y para unir video+audio)
+- Runtime JS opcional pero recomendado para YouTube (Deno, Node, etc.)
 
 ```bash
 git clone https://github.com/Doriogamer/DownloaderMD.git
@@ -71,7 +72,7 @@ python main.py
 | Requisito | Minimo | Recomendado |
 |-----------|--------|------------|
 | **OS** | Windows 10 / Linux / macOS | Windows 10/11 |
-| **Python** | 3.8 | 3.11+ |
+| **Python** | 3.11 | 3.12+ |
 | **RAM** | 512 MB | 2 GB |
 | **Espacio** | 100 MB | 500 MB |
 | **Internet** | Requerida | Requerida |
@@ -118,13 +119,14 @@ Pillow>=13.0.0
 ### "No se puede conectar a YouTube"
 - Verifica tu conexion
 - Actualiza yt-dlp: `pip install --upgrade yt-dlp`
+- Para soporte completo de YouTube instala un runtime JS (recomendado Deno) y asegurate de que yt-dlp lo detecte
 - Si el video pide login o edad: `--cookies-from-browser chrome` o `--cookies cookies.txt`
 - Si tu red bloquea el sitio: `--proxy http://127.0.0.1:8080`
 - Si hay bloqueo de region: `--geo-bypass`
 
 ### El programa no abre
 - `pip install --upgrade -r requirements.txt`
-- Python 3.8+ (preferible 3.11+)
+- Python 3.11+ requerido
 - Abre un [Issue](https://github.com/Doriogamer/DownloaderMD/issues)
 
 ---
