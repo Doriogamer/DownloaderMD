@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""DownloaderMD v1.57.0 — motor abierto + CLI/GUI."""
+"""DownloaderMD v1.58.0 — motor abierto + CLI/GUI."""
 import gzip
 import base64
 import pathlib
@@ -24,7 +24,7 @@ else:
     _src = gzip.decompress(base64.b64decode(_payload)).decode("utf-8")
     exec(compile(_src, str(_here / "engine_legacy.py"), "exec"), globals())
 
-APP_VERSION = "1.57.0"
+APP_VERSION = "1.58.0"
 HISTORY_FILE = os.path.join(SETTINGS_DIR, "history.json")
 HTTP_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/159.0.0.0 Safari/537.36"
 
