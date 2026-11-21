@@ -1,3 +1,11 @@
+## [1.59.0] - 2026-11-21
+
+### Cambiado
+- Version 1.59.0
+- User-Agent HTTP mantenido en Chrome 159 (version estable reciente)
+- Requisito yt-dlp mantenido en >=2026.10.26 (ultima estable)
+- Documentacion y pagina de GitHub Pages alineados a 1.59.0
+
 ## [1.58.0] - 2026-11-20
 
 ### Cambiado
