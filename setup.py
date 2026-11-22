@@ -8,7 +8,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="downloadMD",
-    version="1.57.0",
+    version="1.60.0",
     author="Doriogamer",
     author_email="dalvarezwallace2@gmail.com",
     description="Descargador universal para YouTube, MP3 y links directos",
@@ -16,7 +16,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Doriogamer/DownloaderMD",
     py_modules=["downloader", "main", "app_core", "engine"],
-    python_requires=">=3.8",
+    python_requires=">=3.11",
     install_requires=requirements,
     entry_points={
         "console_scripts": [
