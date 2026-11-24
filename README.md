@@ -5,7 +5,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 
 ![Python](https://img.shields.io/badge/Python-3.11+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-1.61.0-brightgreen)
+![Version](https://img.shields.io/badge/Version-1.62.0-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
@@ -53,7 +53,7 @@ Interfaz grafica moderna. Funciona en Windows 10+. Rapido, facil y sin complicac
 ### Opcion 2: Instalacion manual (Para desarrolladores)
 
 **Requisitos previos:**
-- Python 3.11 o superior (requerido por yt-dlp 2026.10.26+)
+- Python 3.11 o superior (requerido por yt-dlp 2026.11.23+)
 - pip
 - ffmpeg en el PATH (para audio y para unir video+audio)
 - Runtime JS opcional pero recomendado para YouTube (Deno, Node, etc.)
@@ -106,7 +106,7 @@ Contenedores: `mp4`, `mkv`, `webm`.
 ## 📦 Dependencias
 
 ```
-yt-dlp>=2026.10.26
+yt-dlp>=2026.11.23
 requests>=2.32.0
 customtkinter>=6.0.0
 Pillow>=13.0.0
