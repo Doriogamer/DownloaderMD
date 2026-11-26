@@ -1,3 +1,11 @@
+## [1.64.0] - 2026-11-26
+
+### Cambiado
+- Version 1.64.0
+- User-Agent HTTP actualizado a Chrome 158 (versión estable actual)
+- Mejor detección de enlaces directos (más extensiones)
+- Documentación y página de GitHub Pages alineados a 1.64.0
+
 ## [1.63.0] - 2026-11-25
 
 ### Cambiado

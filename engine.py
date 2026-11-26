@@ -20,13 +20,13 @@ except ImportError:
 import requests
 import yt_dlp
 
-APP_VERSION = "1.63.0"
+APP_VERSION = "1.64.0"
 SETTINGS_DIR = Path.home() / ".downloadermd"
 SETTINGS_DIR.mkdir(exist_ok=True)
 HISTORY_FILE = SETTINGS_DIR / "history.json"
 CONFIG_FILE = SETTINGS_DIR / "config.json"
 
-DEFAULT_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+DEFAULT_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36"
 
 def load_config():
     if CONFIG_FILE.exists():
@@ -68,8 +68,12 @@ class Downloader:
         self.extra_opts = extra_opts or {}
 
     def is_direct_link(self):
-        video_sites = ("youtube", "youtu.be", "tiktok", "instagram", "twitter", "x.com", "facebook", "vimeo")
-        return not any(s in self.url.lower() for s in video_sites) and any(self.url.lower().endswith(ext) for ext in (".mp4", ".mkv", ".webm", ".mp3", ".zip", ".rar", ".pdf", ".exe"))
+        # Simple heuristic: not a known video platform and looks like a file
+        video_sites = ("youtube", "youtu.be", "tiktok", "instagram", "twitter", "x.com", "facebook", "vimeo", "twitch", "soundcloud")
+        lower = self.url.lower()
+        if any(s in lower for s in video_sites):
+            return False
+        return any(lower.endswith(ext) for ext in (".mp4", ".mkv", ".webm", ".mp3", ".m4a", ".zip", ".rar", ".pdf", ".exe", ".iso", ".7z"))
 
     def download(self, progress_callback=None):
         if self.is_direct_link():
