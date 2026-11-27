@@ -1,3 +1,11 @@
+## [1.65.0] - 2026-11-27
+
+### Cambiado
+- Version 1.65.0
+- User-Agent HTTP actualizado a Chrome 159
+- Mejor detección de enlaces directos (más extensiones y sitios)
+- Documentación alineada a 1.65.0
+
 ## [1.64.0] - 2026-11-26
 
 ### Cambiado
